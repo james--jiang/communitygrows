@@ -8,6 +8,6 @@
 Put Link Here
 
 ###Heroku Deployment Link
-Put Lnik Here
+Put Link Here
 
 ###CodeClimate and Travis-CI

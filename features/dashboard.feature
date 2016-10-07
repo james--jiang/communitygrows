@@ -19,7 +19,7 @@ Scenario: see all the tabs
 # happy path  
 Scenario: see all the panels
   Then I should see "Main Announcements"
-  And I should see "Calendar"
+  #And I should see "Calendar"
   And I should see "Date"
   And I should see "Title"
 

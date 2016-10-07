@@ -66,7 +66,7 @@ Scenario: User can delete an announcement
   
 Scenario: see five categories
   When I am on the document repository page
-  Then I should see "CommunityGrows Administration"
+  Then I should see "About Community Grows"
   Then I should see "Board Overview"
   Then I should see "Board Activities"
   Then I should see "Budgets and Finances"

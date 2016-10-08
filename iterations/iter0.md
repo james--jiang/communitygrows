@@ -7,3 +7,4 @@ Screencasts:
 - Tommy Huynh: https://www.youtube.com/watch?v=NUi2k5QDyz8&ab_channel=CommunityGrowsCS169Fall2016
 - Jack Sullivan: https://www.youtube.com/watch?v=sWeNH4ZfXR8&ab_channel=CommunityGrowsCS169Fall2016
 - James Jiang: https://www.youtube.com/watch?v=wUm6bwabduc&ab_channel=CommunityGrowsCS169Fall2016
+- Nathan Pannell: https://www.youtube.com/watch?v=BGgcdCWHXSs&ab_channel=CommunityGrowsCS169Fall2016

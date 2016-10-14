@@ -36,96 +36,96 @@ Background: users, announcements, and documents in database
 Scenario: An email should be sent if anyone creates an announcement to the internal subcommittee
   Given I am on the internal affairs committee page
   When I follow "Add new announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone creates an announcement to the external subcommittee
   Given I am on the external affairs committee page
   When I follow "Add new announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
   
 Scenario: An email should be sent if anyone creates an announcement to the executive subcommittee
-  Given I am on the executive affairs committee page
+  Given I am on the executive committee page
   When I follow "Add new announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone creates a document to the internal subcomittee
   Given I am on the internal affairs committee page
   When I follow "Add new document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone creates a document to the external subcomittee
   Given I am on the external affairs committee page
   When I follow "Add new document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
   
 Scenario: An email should be sent if anyone creates a document to the executive subcomittee
-  Given I am on the executive affairs committee page
+  Given I am on the executive committee page
   When I follow "Add new document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone makes changes to a document to the internal subcomittee
   Given I am on the internal affairs committee page
   When I follow "Edit Document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone makes changes to a document to the external subcomittee
   Given I am on the external affairs committee page
   When I follow "Edit Document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
   
 Scenario: An email should be sent if anyone makes changes to a document to the executive subcomittee
-  Given I am on the executive affairs committee page
+  Given I am on the executive committee page
   When I follow "Edit Document"
-  And I fill "file_title" with "Jack"
-  And I fill "file_url" with "www.cs169.com"
+  And I fill in "title" with "Jack"
+  And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
   
 Scenario: An email should be sent if anyone makes a change to an announcement to the internal subcommittee
   Given I am on the internal affairs committee page
   When I follow "Edit Announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
   
 Scenario: An email should be sent if anyone makes a change to an announcement to the external subcommittee
   Given I am on the external affairs committee page
   When I follow "Edit Announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
 Scenario: An email should be sent if anyone makes a change to an announcement to the executive subcommittee
-  Given I am on the executive affairs committee page
+  Given I am on the executive committee page
   When I follow "Edit Announcement"
-  And I fill "Title" with "Tilted"
-  And I fill "Content" with "I am"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 

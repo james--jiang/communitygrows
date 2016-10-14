@@ -129,14 +129,4 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
-# Scenario: An email should be sent if an admin makes changes to new event
-#   Given a logged in admin
-#   And I am on the CommunityGrows admin_dashboard page
-#   And I create a new event  
-#   Then I should see "Emails sent to subcommittee members"
 
-# Scenario: An email should be sent if an admin makes changes to meeting location
-#   Given a logged in admin
-#   And I am on the CommunityGrows admin_dashboard page
-#   And I update event location
-#   Then I should see "Emails sent to subcommittee members"

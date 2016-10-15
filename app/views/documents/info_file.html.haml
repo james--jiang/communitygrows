@@ -1,0 +1,10 @@
+#docRepo
+  %h1 #{@file.title} Information
+  
+
+- if flash[:notice] and flash[:notice]!="Signed in successfully."
+  #flashNotice
+    = flash[:notice]
+
+%p= link_to "Edit document", edit_file_path(@file.id)  
+%p= link_to "Delete document", delete_file_path(@file.id), data: { confirm: 'Are you sure?' }

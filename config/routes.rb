@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get 'documents/delete_file' => 'documents#delete_file', as: :delete_file
   get 'documents/edit_file' => 'documents#edit_file', as: :edit_file
   put 'documents/edit_file' => 'documents#update_file', as: :update_file
+  get 'documents/doc_info' => 'documents#info_file', as: :info_file
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

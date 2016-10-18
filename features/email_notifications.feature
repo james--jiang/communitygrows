@@ -121,7 +121,7 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I press "Submit" 
   Then I should see "Emails sent to subcommittee members"
 
-Scenario: An email should be sent if anyone makes a change to an announcement to the executive subcommittee
+Scenario: An email should be sent if anyone makes a change to an announcement to the executive sub-committee
   Given I am on the executive committee page
   When I follow "Edit Announcement"
   And I fill in "Title" with "Tilted"

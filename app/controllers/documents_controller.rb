@@ -29,6 +29,7 @@ class DocumentsController < ActionController::Base
                     User.all.each do |user| 
                         NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
                     end
+                end
                 flash[:notice] = "#{@file.title} was successfully created and email was succesfully sent."
                 redirect_to documents_path 
             end

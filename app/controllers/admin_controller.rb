@@ -95,7 +95,7 @@ class AdminController < ActionController::Base
         @target_announcement.update_attributes!(announcement_params)
         if Rails.env.production?
             User.all.each do |user| 
-                NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
+                NotificationMailer.announcement_update_email(user, @target_announcement).deliver
             end
         end
         flash[:notice] = "Announcement with title [#{@target_announcement.title}] updated successfully and email was sent successfully"

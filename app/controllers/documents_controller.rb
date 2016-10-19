@@ -25,11 +25,11 @@ class DocumentsController < ActionController::Base
                     file[:url]="http://"+file[:url]
                 end
                 @file = Document.create!(file_params)
-                NotificationMailer.new_document_email(User.find_by_email("james.jiang@berkeley.edu"),Document.find_by_title(file[:title])).deliver
-                # User.all.each do |user| 
-                #     NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
-                # end
-                flash[:notice] = "#{@file.title} was successfully created."
+                if Rails.env.production?
+                    User.all.each do |user| 
+                        NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
+                    end
+                flash[:notice] = "#{@file.title} was successfully created and email was succesfully sent."
                 redirect_to documents_path 
             end
         end
@@ -54,12 +54,12 @@ class DocumentsController < ActionController::Base
                 file[:url]="http://"+file[:url]
             end
             @target_file.update_attributes!(file_params)
-            # User.all.each do |user| 
-            #     NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
-            # end
-            NotificationMailer.document_update_email(User.find_by_email("james.jiang@berkeley.edu"), Document.find_by_title(file[:title])).deliver
-
-            flash[:notice] = "Document with title [#{@target_file.title}] updated successfully and email was sent"
+            if Rails.env.production?
+                User.all.each do |user| 
+                    NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
+                end
+            end
+            flash[:notice] = "Document with title [#{@target_file.title}] updated successfully and email was successfully sent."
             redirect_to(documents_path)
         end
     end
@@ -67,7 +67,7 @@ class DocumentsController < ActionController::Base
     def delete_file
         @file_to_delete = Document.find params[:format]
         @file_to_delete.destroy!
-        flash[:notice] = "Document with title [#{@file_to_delete.title}] deleted successfully and email was sent"
+        flash[:notice] = "Document with title [#{@file_to_delete.title}] deleted successfully."
         redirect_to documents_path
     end
     

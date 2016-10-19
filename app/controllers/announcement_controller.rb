@@ -20,11 +20,10 @@ class AnnouncementController < ActionController::Base
         Announcement.create!(:title => @title, :content => @content, :committee_type => @committee_type)
         if Rails.env.production?
             User.all.each do |user| 
-            NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
+                NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
             end
         end
-
-        flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful and email was sent."
+        flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful and email was succesfully sent."
         redirect_to subcommittee_index_path(:committee_type => @committee_type)
     end
         
@@ -44,13 +43,12 @@ class AnnouncementController < ActionController::Base
             redirect_to edit_committee_announcement_path(@committee_type, @announcement_id) and return
         end
         @target_announcement.update_attributes!(:title => @title, :content => @content, :committee_type => @committee_type)
-        # User.all.each do |user| 
-        #     NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
-        # end
         if Rails.env.production?
-            NotificationMailer.announcement_update_email(User.find_by_email("james.jiang@berkeley.edu"), Announcement.find_by_title(@title)).deliver
+            User.all.each do |user| 
+                NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
+            end
         end
-        flash[:notice] = "Announcement with title [#{@target_announcement.title}] updated successfully"
+        flash[:notice] = "Announcement with title [#{@target_announcement.title}] updated successfully and email was successfully sent"
         redirect_to subcommittee_index_path(@committee_type)
     end
     

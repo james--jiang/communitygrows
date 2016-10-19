@@ -1,3 +1,7 @@
+- if flash[:notice] and flash[:notice]!="Signed in successfully."
+  #flashNotice
+    = flash[:notice]
+
 #content
   = form_tag update_committee_document_path, :method => :put do
     = hidden_field :document, :id

@@ -11,6 +11,11 @@ class DocumentsController < ActionController::Base
         @document_list = Document.order(updated_at: :DESC)
     end
     
+    def info_file
+        @id = params[:format] 
+        @file = Document.find @id
+    end
+    
     def create_file
         begin
         file = params[:file]
@@ -30,6 +35,7 @@ class DocumentsController < ActionController::Base
             end
         end
     end
+    
     
     def edit_file
        @id = params[:format] 

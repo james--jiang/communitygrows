@@ -1,8 +1,10 @@
-class DocumentListController < ActionController::Base
+class DocumentCommitteeController < ActionController::Base
     layout "base"
     before_filter :authenticate_user!
+    
     def new_document
     end
+    
     def create_document
         if params[:title].to_s == "" or params[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."

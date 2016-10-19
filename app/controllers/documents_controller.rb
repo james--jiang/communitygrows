@@ -54,9 +54,11 @@ class DocumentsController < ActionController::Base
                 file[:url]="http://"+file[:url]
             end
             @target_file.update_attributes!(file_params)
-            User.all.each do |user| 
-                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
-            end
+            # User.all.each do |user| 
+            #     NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
+            # end
+            NotificationMailer.document_update_email(User.find_by_email("james.jiang@berkeley.edu"), Document.find_by_title(file[:title])).deliver
+
             flash[:notice] = "Document with title [#{@target_file.title}] updated successfully and email was sent"
             redirect_to(documents_path)
         end

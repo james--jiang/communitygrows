@@ -37,13 +37,14 @@ class EventsController < ApplicationController
         end
         
         
-        if Rails.env.production?
-            User.all.each do |user| 
-                NotificationMailer.new_event_email(user, Event.find_by_title(@title)).deliver
-            end
-        end
         
         @event = Event.create(event_params)
+
+        if Rails.env.production?
+            User.all.each do |user| 
+                NotificationMailer.new_event_email(user, @event).deliver
+            end
+        end
         @event.save!
         flash[:notice] = "Event titled #{@title} created successfully and email was successfully sent."
         redirect_to admin_index_path
@@ -78,13 +79,13 @@ class EventsController < ApplicationController
             redirect_to edit_event_path(@event.id) and return
         end
         
+        flash[:notice] = "Event was updated and email was successfully sent."
+        @event.update_attributes!(event_params)
         if Rails.env.production?
             User.all.each do |user| 
                 NotificationMailer.event_update_email(user, @event).deliver
             end
         end
-        flash[:notice] = "Event was updated and email was successfully sent."
-        @event.update_attributes!(event_params)
         redirect_to admin_index_path 
     end
     

@@ -129,19 +129,36 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I press "Submit" 
   Then I should see "email was successfully sent"
   
-Scenario: An email should be sent if an admin creates a new event
+Scenario: An email should be sent if an admin creates an announcement
+  Given I am on the internal affairs committee page
+  When I follow "New Announcement"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
+  And I press "Submit" 
+  Then I should see "email was successfully sent"
+  
+Scenario: An email should be sent if an admin creates an announcement
   Given I am on the CommunityGrows admin_dashboard page
-  When I follow "New Event"
+  Then I should see "fkasdjfkjsdf"
+  When I press "New Announcement"
+  And I fill in "Title" with "Tilted"
+  And I fill in "Content" with "I am"
+  And I press "Submit" 
+  Then I should see "email was successfully sent"
+  
+Scenario: An email should be sent if an admin creates a new event
+  Given a logged in admin
+  When I am on the CommunityGrows admin_dashboard page
+  When I press "New Event"
   And I fill in "Title" with "Big Game"
   And I fill in "Location" with "Berkeley"
   Then I should see "email was successfully sent" 
   
-Scenario: An email should be sent if an admin makes changes to new event
-  Given I am on the CommunityGrows admin_dashboard page
-  the (CommunityGrows )?admin_dashboard page
-  When I follow "Edit Event"
-  And I fill in "Title" with "Big Game 2"
-  And I fill in "Location" with "Stanford"
-  Then I should see "email was successfully sent" 
+# Scenario: An email should be sent if an admin makes changes to new event
+#   Given I am on the CommunityGrows admin_dashboard page
+#   When I follow "Edit Event"
+#   And I fill in "Title" with "Big Game 2"
+#   And I fill in "Location" with "Stanford"
+#   Then I should see "email was successfully sent" 
 
 

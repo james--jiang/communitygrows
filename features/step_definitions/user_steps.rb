@@ -27,7 +27,7 @@ Given /^a logged in user$/ do
   fill_in "user_email", :with => "dummy@dummy.com"
   fill_in "password", :with => "dummypass"
   click_button "Log in"
-  sleep(0.01)
+  sleep(0.1)
 end
 
 Given /^I edit password$/ do

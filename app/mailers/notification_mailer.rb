@@ -23,4 +23,16 @@ class NotificationMailer < ApplicationMailer
   	@document = document
     mail(to: @user.email, subject: 'Document Edited')
   end
+  
+  def new_event_email(user, event)
+  	@user = user
+  	@event = event
+    mail(to: @user.email, subject: 'New Event Created')
+  end
+  
+  def event_update_email(user, event)
+  	@user = user
+  	@event = event
+    mail(to: @user.email, subject: 'Event Edited')
+  end
 end

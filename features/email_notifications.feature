@@ -39,7 +39,7 @@ Scenario: An email should be sent if anyone creates an announcement to the inter
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone creates an announcement to the external subcommittee
   Given I am on the external affairs committee page
@@ -47,7 +47,7 @@ Scenario: An email should be sent if anyone creates an announcement to the exter
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
   
 Scenario: An email should be sent if anyone creates an announcement to the executive subcommittee
   Given I am on the executive committee page
@@ -55,7 +55,7 @@ Scenario: An email should be sent if anyone creates an announcement to the execu
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone creates a document to the internal subcomittee
   Given I am on the internal affairs committee page
@@ -63,7 +63,7 @@ Scenario: An email should be sent if anyone creates a document to the internal s
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone creates a document to the external subcomittee
   Given I am on the external affairs committee page
@@ -71,7 +71,7 @@ Scenario: An email should be sent if anyone creates a document to the external s
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
   
 Scenario: An email should be sent if anyone creates a document to the executive subcomittee
   Given I am on the executive committee page
@@ -79,7 +79,7 @@ Scenario: An email should be sent if anyone creates a document to the executive 
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone makes changes to a document to the internal subcomittee
   Given I am on the internal affairs committee page
@@ -87,7 +87,7 @@ Scenario: An email should be sent if anyone makes changes to a document to the i
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone makes changes to a document to the external subcomittee
   Given I am on the external affairs committee page
@@ -95,7 +95,7 @@ Scenario: An email should be sent if anyone makes changes to a document to the e
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
   
 Scenario: An email should be sent if anyone makes changes to a document to the executive subcomittee
   Given I am on the executive committee page
@@ -103,7 +103,7 @@ Scenario: An email should be sent if anyone makes changes to a document to the e
   And I fill in "title" with "Jack"
   And I fill in "url" with "www.cs169.com"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
   
 Scenario: An email should be sent if anyone makes a change to an announcement to the internal subcommittee
   Given I am on the internal affairs committee page
@@ -111,7 +111,7 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
   
 Scenario: An email should be sent if anyone makes a change to an announcement to the external subcommittee
   Given I am on the external affairs committee page
@@ -119,7 +119,7 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
 
 Scenario: An email should be sent if anyone makes a change to an announcement to the executive sub-committee
   Given I am on the executive committee page
@@ -127,6 +127,18 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I fill in "Title" with "Tilted"
   And I fill in "Content" with "I am"
   And I press "Submit" 
-  Then I should see "Emails sent to subcommittee members"
+  Then I should see "email was successfully sent"
+  
+# Scenario: An email should be sent if an admin makes changes to new event
+#   Given a logged in admin
+#   And I am on the CommunityGrows admin_dashboard page
+#   And I create a new event  
+#   Then I should see "Emails sent to subcommittee members"
+
+# Scenario: An email should be sent if an admin makes changes to meeting location
+#   Given a logged in admin
+#   And I am on the CommunityGrows admin_dashboard page
+#   And I update event location
+#   Then I should see "Emails sent to subcommittee members"
 
 

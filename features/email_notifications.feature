@@ -129,16 +129,19 @@ Scenario: An email should be sent if anyone makes a change to an announcement to
   And I press "Submit" 
   Then I should see "email was successfully sent"
   
-# Scenario: An email should be sent if an admin makes changes to new event
-#   Given a logged in admin
-#   And I am on the CommunityGrows admin_dashboard page
-#   And I create a new event  
-#   Then I should see "Emails sent to subcommittee members"
-
-# Scenario: An email should be sent if an admin makes changes to meeting location
-#   Given a logged in admin
-#   And I am on the CommunityGrows admin_dashboard page
-#   And I update event location
-#   Then I should see "Emails sent to subcommittee members"
+Scenario: An email should be sent if an admin creates a new event
+  Given I am on the CommunityGrows admin_dashboard page
+  When I follow "New Event"
+  And I fill in "Title" with "Big Game"
+  And I fill in "Location" with "Berkeley"
+  Then I should see "email was successfully sent" 
+  
+Scenario: An email should be sent if an admin makes changes to new event
+  Given I am on the CommunityGrows admin_dashboard page
+  the (CommunityGrows )?admin_dashboard page
+  When I follow "Edit Event"
+  And I fill in "Title" with "Big Game 2"
+  And I fill in "Location" with "Stanford"
+  Then I should see "email was successfully sent" 
 
 

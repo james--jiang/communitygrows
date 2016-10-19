@@ -1,5 +1,4 @@
 # By Tony. Steps needed for user testing
-
 Given /^a valid admin$/ do
   @user = User.create!({
              :email => "admindummy@dummy.com",
@@ -20,6 +19,7 @@ Given /^a logged in admin$/ do
   fill_in "user_email", :with => "admin@communitygrows.org"
   fill_in "password", :with => "communitygrowsrocks"
   click_button "Log in"
+  sleep(0.01)
 end
 
 When /^(?:|I )confirm popup$/ do

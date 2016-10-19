@@ -11,6 +11,7 @@ CodeClimate::TestReporter.start
 require 'cucumber/rails'
 require 'selenium/webdriver'
 
+
 Before do
   if Capybara.current_driver == :selenium
     require 'headless'

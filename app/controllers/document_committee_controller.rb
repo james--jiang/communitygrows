@@ -20,7 +20,12 @@ class DocumentCommitteeController < ActionController::Base
             @url = params[:url]
             @committee_type = params[:committee_type]
             Document.create!(:title => @title, :url => @url, :committee_type => @committee_type)
-            flash[:notice] = 'Document List creation successful.'
+            flash[:notice] = 'Document List creation successful and email was successfully sent.'
+            if Rails.env.production?
+                User.all.each do |user| 
+                    NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                end
+            end
             redirect_to subcommittee_index_path(@committee_type)
         end
     end
@@ -44,7 +49,12 @@ class DocumentCommitteeController < ActionController::Base
             @committee_type = params[:committee_type]
             @target_document = Document.find params[:document][:id]
             @target_document.update_attributes!(:title => @title, :url => @url, :committee_type => @committee_type)
-            flash[:notice] = "Executive Document List with title [#{@target_document.title}] updated successfully"
+            if Rails.env.production?
+                User.all.each do |user| 
+                    NotificationMailer.document_update_email(user, Document.find_by_title(@target_document.id)).deliver
+                end
+            end
+            flash[:notice] = "Executive Document List with title [#{@target_document.title}] updated successfully and email was successfully sent."
             redirect_to subcommittee_index_path(@committee_type)
         end
     end

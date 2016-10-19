@@ -1,18 +1,21 @@
+require 'spec_helper'
 require 'rails_helper'
 
-describe DocumentListController do 
+describe DocumentCommitteeController do 
     fixtures :users
     before(:each) do
         sign_in users(:tester)
         post :create_document, :title => "before hook", :url => "rspec.com", :committee_type => :internal
         @doc = Document.where(title: "before hook").take
     end
+    
     describe "create document" do
         it 'creates a document' do
             post :create_document, :title => "Rspec", :url => "rspec.com", :committee_type => :internal
             flash[:notice].should eq("Document List creation successful.")
         end
     end
+    
     describe "editing document" do
         it 'renders edit page' do
             get :edit_document, :committee_type => @doc.committee_type, :id => @doc.id

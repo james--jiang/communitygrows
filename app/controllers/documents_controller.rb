@@ -14,7 +14,6 @@ class DocumentsController < ActionController::Base
     def info_file
         @id = params[:format] 
         @file = Document.find @id
-        
     end
     
     def create_file

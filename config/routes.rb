@@ -56,11 +56,11 @@ Rails.application.routes.draw do
   get '/show_announcements' => 'announcement#show_announcements', as: :show_announcements 
   post '/search_announcements' => 'announcement#search_announcements'
   
-  get 'subcommittee_index/:committee_type/new_document' => 'document_list#new_document', as: :new_committee_document
-  post 'subcommittee_index/:committee_type/create_document' => 'document_list#create_document', as: :create_committee_document 
-  delete 'subcommittee_index/:committee_type/:document_id/delete_document' => 'document_list#delete_document', as: :delete_committee_document
-  get 'subcommittee_index/:committee_type/edit_document' => 'document_list#edit_document', as: :edit_committee_document 
-  put 'subcommittee_index/:committee_type/update_document' => 'document_list#update_document', as: :update_committee_document
+  get 'subcommittee_index/:committee_type/new_document' => 'document_committee#new_document', as: :new_committee_document
+  post 'subcommittee_index/:committee_type/create_document' => 'document_committee#create_document', as: :create_committee_document 
+  delete 'subcommittee_index/:committee_type/:document_id/delete_document' => 'document_committee#delete_document', as: :delete_committee_document
+  get 'subcommittee_index/:committee_type/edit_document' => 'document_committee#edit_document', as: :edit_committee_document 
+  put 'subcommittee_index/:committee_type/update_document' => 'document_committee#update_document', as: :update_committee_document
   
   get 'documents/new_file' => 'documents#new_file', as: :new_file
   post 'documents/create' => 'documents#create_file', as: :create_file

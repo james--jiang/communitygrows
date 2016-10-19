@@ -14,8 +14,6 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'CGadmin')
       - if documents.empty?
@@ -24,8 +22,6 @@
         %tr
           %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
         
 %h2#committeeTitle Board Overview
 
@@ -35,8 +31,6 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'boardoverview')
       
@@ -44,10 +38,8 @@
         %td= "No files have been entered"
       - documents.each do |file|
         %tr
-          %td= link_to file.title, file.url, :target => "_blank"
+          %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
         
 %h2#committeeTitle Board Activities
 
@@ -57,8 +49,6 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'boardactivities')
       
@@ -66,10 +56,8 @@
         %td= "No files have been entered"
       - documents.each do |file|
         %tr
-          %td= link_to file.title, file.url, :target => "_blank"
+          %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
 
 %h2#committeeTitle Budgets and Finances
 
@@ -79,18 +67,14 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'budgetfinance')
       - if documents.empty?
         %td= "No files have been entered"
       - documents.each do |file|
         %tr
-          %td= link_to file.title, file.url, :target => "_blank"
+          %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
 
 %h2#committeeTitle AB Meetings
 
@@ -100,8 +84,6 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'abmeetings')
       
@@ -109,10 +91,8 @@
         %td= "No files have been entered"
       - documents.each do |file|
         %tr
-          %td= link_to file.title, file.url, :target => "_blank"
+          %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
 
 %h2#committeeTitle Board Resources
 
@@ -122,8 +102,6 @@
       %tr
         %td File name
         %td Updated at
-        %td Edit
-        %td Delete
     %tbody
       - documents = Document.where(:committee_type => 'boardresources')
       
@@ -131,10 +109,8 @@
         %td= "No files have been entered"
       - documents.each do |file|
         %tr
-          %td= link_to file.title, file.url, :target => "_blank"
+          %td= link_to file.title, info_file_path(file.id)
           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-          %td= link_to "Edit document", edit_file_path(file.id)
-          %td= link_to "Delete document", delete_file_path(file.id), data: { confirm: 'Are you sure?' }
           
 
 = link_to 'Add new file', new_file_path, :class => "button"

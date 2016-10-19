@@ -18,9 +18,13 @@ class AnnouncementController < ActionController::Base
         end
         @content = params[:content]
         Announcement.create!(:title => @title, :content => @content, :committee_type => @committee_type)
-        NotificationMailer.announcement_email(User.find_by(email:"james.jiang@berkeley.edu")).deliver
-
-        flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful."
+     
+        # User.all.each do |user| 
+        #     NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
+        # end
+        NotificationMailer.announcement_email(User.find_by(email:"james.jiang@berkeley.edu"), Announcement.find_by_title(@title)).deliver
+        
+        flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful and email was sent."
         redirect_to subcommittee_index_path(:committee_type => @committee_type)
     end
         

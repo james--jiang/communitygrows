@@ -8,7 +8,7 @@ gem 'devise'
 
 gem 'acts_as_tree'
 
-gem 'rake', '10.5.0'
+gem 'rake', '11.3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,6 +23,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 
 gem 'whenever', :require => false
+gem 'rspec-activemodel-mocks'
 
 #Haml
 gem 'haml'
@@ -67,7 +68,8 @@ group :test do
   gem 'simplecov', :require => false #by Tony. Gem for the test coverage
   gem 'codeclimate-test-reporter'
   gem 'capybara', '2.6.2' #by Tony
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '3.0.0'
+  gem 'firefox'
   gem 'headless'
 end
 

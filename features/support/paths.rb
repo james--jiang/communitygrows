@@ -43,6 +43,10 @@ module NavigationHelpers
 
     when /^the new comment page for "([^"]+)"$/ then
       new_comment_path(:announcement_id => Announcement.find_by_title($1).id)
+    
+    when /^the doc info page for "([^"]*)"$/ then
+      info_file_path(Document.find_by_title($1).id)
+      
       
     # "Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

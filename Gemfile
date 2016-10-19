@@ -23,6 +23,7 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 
 gem 'whenever', :require => false
+gem 'rspec-activemodel-mocks'
 
 #Haml
 gem 'haml'

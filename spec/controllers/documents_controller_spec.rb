@@ -51,7 +51,7 @@ describe DocumentsController do
     describe "delete document" do
         it "shows a flash delete message when document successfully deleted" do
             get :delete_file, {:format => @doc.id}
-            flash[:notice].should eq("Document with title [#{@doc.title}] deleted successfully")
+            flash[:notice].should eq("Document with title [#{@doc.title}] deleted successfully.")
         end
         
         it "should redirect to the documents repo page after deletion" do

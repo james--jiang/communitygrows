@@ -2,6 +2,17 @@ rvm:
     - 2.2.2
 
 cache: bundler
+
+before_script:
+    - if [ "${$TRAVIS_OS_NAME}" = "linux" ]; then
+      wget https://github.com/mozilla/geckodriver/releases/geckodriver-v0.11.1-linux64.tar.gz -O /tmp/geckodriver.tar.gz;
+      fi
+    - if [ "${$TRAVIS_OS_NAME}" = "osx" ]; then
+      wget https://github.com/mozilla/geckodriver/releases/geckodriver-v0.11.1-macos.tar.gz -O /tmp/geckodriver.tar.gz;
+      fi
+    - tar -xzvf /tmp/geckodriver.tar.gz
+    - export PATH=$PATH:$PWD
+
 addons:
     code_climate:
        repo_token: 1f9743a554140a590819de5967c4411398a22e31f2d5d439127cdbf33c72a6ab

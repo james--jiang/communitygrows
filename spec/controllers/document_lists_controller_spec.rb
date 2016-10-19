@@ -10,7 +10,7 @@ describe DocumentListController do
     describe "create document" do
         it 'creates a document' do
             post :create_document, :title => "Rspec", :url => "rspec.com", :committee_type => :internal
-            flash[:notice].should eq("Document List creation successful.")
+            flash[:notice].should eq("Document List creation successful and email was successfully sent.")
         end
     end
     describe "editing document" do

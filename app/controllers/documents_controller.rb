@@ -25,9 +25,10 @@ class DocumentsController < ActionController::Base
                     file[:url]="http://"+file[:url]
                 end
                 @file = Document.create!(file_params)
-                User.all.each do |user| 
-                    NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
-                end
+                NotificationMailer.new_document_email(User.find_by_email("james.jiang@berkeley.edu"),Document.find_by_title(file[:title])).deliver
+                # User.all.each do |user| 
+                #     NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
+                # end
                 flash[:notice] = "#{@file.title} was successfully created."
                 redirect_to documents_path 
             end

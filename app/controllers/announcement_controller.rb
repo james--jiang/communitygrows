@@ -22,7 +22,8 @@ class AnnouncementController < ActionController::Base
         # User.all.each do |user| 
         #     NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
         # end
-        NotificationMailer.announcement_email(User.find_by(email:"james.jiang@berkeley.edu")).deliver
+        #testing
+        NotificationMailer.announcement_email(User.find_by(email:"james.jiang@berkeley.edu"),Announcement.find_by_title(@title)).deliver
         
         flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful and email was sent."
         redirect_to subcommittee_index_path(:committee_type => @committee_type)
@@ -44,6 +45,9 @@ class AnnouncementController < ActionController::Base
             redirect_to edit_committee_announcement_path(@committee_type, @announcement_id) and return
         end
         @target_announcement.update_attributes!(:title => @title, :content => @content, :committee_type => @committee_type)
+        User.all.each do |user| 
+            NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
+        end
         flash[:notice] = "Announcement with title [#{@target_announcement.title}] updated successfully"
         redirect_to subcommittee_index_path(@committee_type)
     end

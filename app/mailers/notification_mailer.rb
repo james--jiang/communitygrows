@@ -1,8 +1,26 @@
 class NotificationMailer < ApplicationMailer
   default from: "communitygrows2@gmail.com"
-  def announcement_email(user)
+  def announcement_email(user,announcement)
   	@user = user
-  	# @announcement = announcement
+  	@announcement = announcement
     mail(to: @user.email, subject: 'New Announcement Created')
+  end
+
+  def announcement_update_email(user, announcement)
+  	@user = user
+  	@announcement = announcement
+    mail(to: @user.email, subject: 'Announcement Updated')
+  end
+
+  def new_document_email(user,document)
+  	@user = user
+  	@document = document
+    mail(to: @user.email, subject: 'New Document Created')
+  end
+
+  def document_update_email(user,document)
+  	@user = user
+  	@document = document
+    mail(to: @user.email, subject: 'Document Edited')
   end
 end

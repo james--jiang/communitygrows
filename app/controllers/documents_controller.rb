@@ -25,6 +25,9 @@ class DocumentsController < ActionController::Base
                     file[:url]="http://"+file[:url]
                 end
                 @file = Document.create!(file_params)
+                User.all.each do |user| 
+                    NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
+                end
                 flash[:notice] = "#{@file.title} was successfully created."
                 redirect_to documents_path 
             end
@@ -50,7 +53,10 @@ class DocumentsController < ActionController::Base
                 file[:url]="http://"+file[:url]
             end
             @target_file.update_attributes!(file_params)
-            flash[:notice] = "Document with title [#{@target_file.title}] updated successfully"
+            User.all.each do |user| 
+                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
+            end
+            flash[:notice] = "Document with title [#{@target_file.title}] updated successfully and email was sent"
             redirect_to(documents_path)
         end
     end
@@ -58,7 +64,7 @@ class DocumentsController < ActionController::Base
     def delete_file
         @file_to_delete = Document.find params[:format]
         @file_to_delete.destroy!
-        flash[:notice] = "Document with title [#{@file_to_delete.title}] deleted successfully"
+        flash[:notice] = "Document with title [#{@file_to_delete.title}] deleted successfully and email was sent"
         redirect_to documents_path
     end
     

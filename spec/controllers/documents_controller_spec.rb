@@ -27,24 +27,44 @@ describe DocumentsController do
             post :create_file, :file => {:title => "something", :url => "something", :committee_type => 'boardoverview'}
             flash[:notice].should eq("Please enter a valid URL.")
         end
+        
+        it "development env sends email" do
+            Rails.env.stub(:development? => true)
+            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview'}
+        end
     end
     
+    describe "acessing document page (index)" do
+        it "accesses the index page successfully" do
+            get :index
+            response.should render_template(:index)
+        end
+    end
     
-    describe "edit document (file) in the doc info page" do
+    describe "edit/update document (file) in the doc info page" do
         before(:each) do
             get :info_file, :format => @doc.id
         end
-        
-        # it "contains the neceassary field texts" do
-        #     #visit '/documents/doc_info.' + @doc.id.to_s
-        #     page.should have_content("Title")
-        #     page.should have_content("URL")
-        # end
         
         it "edits a document" do
             put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview'}}
             page.should redirect_to(:documents)
             expect(Document.find(@doc.id).title).to eql("ccc")
+        end
+        
+        it "checks for populated fields" do
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :committee_type => 'boardoverview'}}
+            flash[:notice].should eq("Populate all fields before submission.") 
+        end
+        
+        it "checks validity of URL" do
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd", :committee_type => 'boardoverview'}}
+            flash[:notice].should eq("Please enter a valid URL.") 
+        end
+        
+        it "development env sends email" do
+            Rails.env.stub(:development? => true)
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview'}}
         end
     end
     

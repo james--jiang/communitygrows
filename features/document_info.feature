@@ -43,7 +43,7 @@ Scenario: User cannot edit an existing file without proper file name
 Scenario: User can delete an announcement
   When I follow "Delete document"
   And I confirm popup
-  Then I should be on the document repository page
-  And I should see "deleted successfully"
+  # Then I should be on the document repository page
+  Then I should see "deleted successfully"
   
   

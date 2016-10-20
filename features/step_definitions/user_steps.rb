@@ -1,5 +1,5 @@
 # By Tony. Steps needed for user testing
-
+require 'selenium/webdriver'
 Given /the following users exist/ do |users_table|
     User.delete_all
     users_table.hashes.each do |user|
@@ -27,6 +27,7 @@ Given /^a logged in user$/ do
   fill_in "user_email", :with => "dummy@dummy.com"
   fill_in "password", :with => "dummypass"
   click_button "Log in"
+  sleep(0.5)
 end
 
 Given /^I edit password$/ do

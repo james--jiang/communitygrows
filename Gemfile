@@ -69,7 +69,6 @@ group :test do
   gem 'codeclimate-test-reporter'
   gem 'capybara', '2.6.2' #by Tony
   gem 'selenium-webdriver', '3.0.0'
-  gem 'firefox'
   gem 'headless'
 end
 

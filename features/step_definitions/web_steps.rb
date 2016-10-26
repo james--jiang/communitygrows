@@ -31,6 +31,10 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+Given /^PENDING/ do
+  pending
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }

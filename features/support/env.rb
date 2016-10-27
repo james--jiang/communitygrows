@@ -9,17 +9,20 @@ require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
 require 'cucumber/rails'
-require 'selenium/webdriver'
+# require 'selenium/webdriver'
 
 
-Before do
-  if Capybara.current_driver == :selenium
-    require 'headless'
+# Before do
+#   if Capybara.current_driver == :selenium
+#     require 'headless'
 
-    headless = Headless.new
-    headless.start
-  end
-end
+#     headless = Headless.new
+#     headless.start
+#   end
+# end
+
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

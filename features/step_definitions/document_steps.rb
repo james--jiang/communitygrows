@@ -8,3 +8,7 @@ Given /the following documents exist/ do |documents_table|
         Document.create!(document)
     end
 end
+
+Given /^PENDING/ do
+    pending
+end

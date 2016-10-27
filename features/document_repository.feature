@@ -1,4 +1,3 @@
-# by Tony
 Feature: successfully CRUD on the document repository
   
   As a user
@@ -26,6 +25,11 @@ Scenario: User can't add a new document without proper file name
   And I press "Submit"
   And I should see "Populate all fields before submission."
   
+Scenario: I should see the read/unread column
+  # Column name is Read/Unread? for now
+  Given PENDING
+  Then I should see "Read/Unread?"
+
 Scenario: see six categories
   When I am on the document repository page
   Then I should see "About Community Grows"
@@ -34,4 +38,6 @@ Scenario: see six categories
   Then I should see "Budgets and Finances"
   Then I should see "AB Meetings"
   Then I should see "Board Resources"
+  
+
   

@@ -4,7 +4,7 @@ rvm:
 cache: bundler
 
 before_script:
-    - brew install phantomjs
+    - npm install -g phantomjs-prebuilt
 
 addons:
     firefox: "49.0"

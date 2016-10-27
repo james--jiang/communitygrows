@@ -14,6 +14,7 @@ class UserController < ActionController::Base
     end
     
     def update
+
         @user = User.find(params[:user_id])
         if @user.update_attributes(user_params)
             bypass_sign_in(@user)
@@ -24,4 +25,16 @@ class UserController < ActionController::Base
             redirect_to user_credentials_path(@user.id)    
         end
     end
+
+    def updateEmailPreferences
+        @user = User.find(params[:user_id])
+        if @user.update_attributes(user_params)
+            flash[:notice] = "feifejiejwzibirvsd"
+        else
+            flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
+        end
+        redirect_to user_credentials_path(@user.id)    
+
+    end
+
 end

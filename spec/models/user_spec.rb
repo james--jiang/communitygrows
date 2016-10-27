@@ -8,4 +8,5 @@ RSpec.describe User, type: :model do
   	    	u.delete
   	    end
     end
+
 end

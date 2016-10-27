@@ -14,16 +14,14 @@ class UserController < ActionController::Base
     end
     
     def update
-        @user = User.find params[:user_id]
-        begin
-            @user.update_attributes!(user_params)
-        rescue Exception => e
-            flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
-            redirect_to user_credentials_path(@user.id)
-        else
+        @user = User.find(params[:user_id])
+        if @user.update_attributes(user_params)
+            bypass_sign_in(@user)
             flash[:notice] = "#{@user.email}'s credentials were successfully updated."
             redirect_to user_credentials_path(@user.id)
+        else
+            flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
+            redirect_to user_credentials_path(@user.id)    
         end
     end
-
 end

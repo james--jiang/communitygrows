@@ -31,6 +31,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
@@ -104,7 +105,6 @@ When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-
   if page.respond_to? :should
     page.should have_content(text)
   else

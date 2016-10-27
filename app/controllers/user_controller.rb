@@ -17,6 +17,7 @@ class UserController < ActionController::Base
         @user = User.find params[:user_id]
         begin
             @user.update_attributes!(user_params)
+             bypass_sign_in(@user)
         rescue Exception => e
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
             redirect_to user_credentials_path(@user.id)

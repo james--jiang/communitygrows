@@ -7,8 +7,9 @@ class DocumentsController < ActionController::Base
     end
   
     def index
-        @documents = Document.all
-        @document_list = Document.order(updated_at: :DESC)
+        # @documents = Document.all
+        # @document_list = Document.order(updated_at: :DESC)
+        @categories = Category.all
     end
     
     def info_file

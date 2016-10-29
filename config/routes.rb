@@ -71,7 +71,7 @@ Rails.application.routes.draw do
 
 
   # Category Management
-  get 'categories/index' => 'categories#index', as: :category_index
+  get 'categories/index' => 'category#index', as: :category_index
   get 'categories/new_category' => 'category#new_category', as: :new_category
   post 'categories/create' => 'category#create_category', as: :create_category
   delete 'categories/delete_category' => 'category#delete_category', as: :delete_category

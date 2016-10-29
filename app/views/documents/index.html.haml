@@ -6,111 +6,141 @@
   #flashNotice
     = flash[:notice]
 
-%h2#committeeTitle About Community Grows
+- @categories.each do |category|
 
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'CGadmin')
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
+  %h2#committeeTitle= "#{category.name}"
+
+  #document_content
+    %table
+      %thead
         %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+          %td File name
+          %td Updated at
+      %tbody
+        - documents = category.documents
+        - if documents.empty?
+          %td= "No files have been entered"
+        - documents.each do |file|
+          %tr
+            %td= link_to file.title, info_file_path(file.id)
+            %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
         
-%h2#committeeTitle Board Overview
+= link_to 'Add new file', new_file_path, :class => "button"
 
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'boardoverview')
-      
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
-        %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+
+/ #docRepo
+/   %h1 Document Repository
+  
+
+/ - if flash[:notice] and flash[:notice]!="Signed in successfully."
+/   #flashNotice
+/     = flash[:notice]
+
+/ %h2#committeeTitle About Community Grows
+
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'CGadmin')
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
         
-%h2#committeeTitle Board Activities
+/ %h2#committeeTitle Board Overview
 
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'boardactivities')
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'boardoverview')
       
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
-        %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+        
+/ %h2#committeeTitle Board Activities
 
-%h2#committeeTitle Budgets and Finances
-
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'budgetfinance')
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
-        %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
-
-%h2#committeeTitle AB Meetings
-
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'abmeetings')
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'boardactivities')
       
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
-        %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
 
-%h2#committeeTitle Board Resources
+/ %h2#committeeTitle Budgets and Finances
 
-#document_content
-  %table
-    %thead
-      %tr
-        %td File name
-        %td Updated at
-    %tbody
-      - documents = Document.where(:committee_type => 'boardresources')
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'budgetfinance')
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+
+/ %h2#committeeTitle AB Meetings
+
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'abmeetings')
       
-      - if documents.empty?
-        %td= "No files have been entered"
-      - documents.each do |file|
-        %tr
-          %td= link_to file.title, info_file_path(file.id)
-          %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+
+/ %h2#committeeTitle Board Resources
+
+/ #document_content
+/   %table
+/     %thead
+/       %tr
+/         %td File name
+/         %td Updated at
+/     %tbody
+/       - documents = Document.where(:committee_type => 'boardresources')
+      
+/       - if documents.empty?
+/         %td= "No files have been entered"
+/       - documents.each do |file|
+/         %tr
+/           %td= link_to file.title, info_file_path(file.id)
+/           %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
           
 
-= link_to 'Add new file', new_file_path, :class => "button"
+/ = link_to 'Add new file', new_file_path, :class => "button"

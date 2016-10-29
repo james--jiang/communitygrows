@@ -71,11 +71,12 @@ Rails.application.routes.draw do
 
 
   # Category Management
-  get 'categories/new_category' => 'categories#new_category', as: :new_category
-  post 'categories/create' => 'categories#create_category', as: :create_category
-  delete 'categories/delete_category' => 'categories#delete_category', as: :delete_category
-  get 'categories/edit_category' => 'categories#edit_category', as: :edit_category
-  put 'categories/edit_category' => 'categories#update_category', as: :update_category
+  get 'categories/index' => 'categories#index', as: :category_index
+  get 'categories/new_category' => 'category#new_category', as: :new_category
+  post 'categories/create' => 'category#create_category', as: :create_category
+  delete 'categories/delete_category' => 'category#delete_category', as: :delete_category
+  get 'categories/edit_category' => 'category#edit_category', as: :edit_category
+  put 'categories/edit_category' => 'category#update_category', as: :update_category
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

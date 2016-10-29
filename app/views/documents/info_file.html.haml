@@ -25,11 +25,8 @@
   = label :file, :url, 'URL'
   = text_field :file, 'url', :value => @file.url
 
-  = label :file, :committee_type, 'Category'
-  = select :file, :committee_type, {'About Community Grows' => 'CGadmin', 
-            'Board Overview' => 'boardoverview', 'Board Activities' => 'boardactivities', 
-            'Budgets and Finances' => 'budgetfinance', 'AB Meetings' => 'abmeetings', 
-            'Board Resources' => 'boardresources'}
+  = label :file, :category_id, 'Category'
+  = select :file, :category_id, @categories.map{ |category| [category.name, category.id]}.to_h
 
   = submit_tag 'Submit'
   

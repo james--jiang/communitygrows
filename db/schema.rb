@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701062515) do
+ActiveRecord::Schema.define(version: 20161029182756) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20160701062515) do
     t.string   "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -70,8 +74,7 @@ ActiveRecord::Schema.define(version: 20160701062515) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.boolean  "admin"
-    t.datetime "last_sign_in_at",        default: '2016-10-14 21:53:04', null: false
-
+    t.datetime "last_sign_in_at",        default: '2016-10-14 14:12:53', null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

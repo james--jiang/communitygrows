@@ -68,6 +68,14 @@ Rails.application.routes.draw do
   get 'documents/edit_file' => 'documents#edit_file', as: :edit_file
   put 'documents/edit_file' => 'documents#update_file', as: :update_file
   get 'documents/doc_info' => 'documents#info_file', as: :info_file
+
+
+  # Category Management
+  get 'categories/new_category' => 'categories#new_category', as: :new_category
+  post 'categories/create' => 'categories#create_category', as: :create_category
+  delete 'categories/delete_category' => 'categories#delete_category', as: :delete_category
+  get 'categories/edit_category' => 'categories#edit_category', as: :edit_category
+  put 'categories/edit_category' => 'categories#update_category', as: :update_category
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

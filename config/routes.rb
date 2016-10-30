@@ -77,6 +77,8 @@ Rails.application.routes.draw do
   delete 'categories/:id/delete_category' => 'category#delete_category', as: :delete_category
   get 'categories/:id/edit_category' => 'category#edit_category', as: :edit_category
   put 'categories/:id/edit_category' => 'category#update_category', as: :update_category
+  get 'categories/:id/hide_category' => 'category#hide_category', as: :hide_category
+  get 'categories/:id/show_category' => 'category#show_category', as: :show_category
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

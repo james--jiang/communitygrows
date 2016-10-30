@@ -142,7 +142,6 @@ td {
   transition: border 500ms ease; 
 }
 #category_name a:hover {
-  /*text-decoration: underline;*/
   border-bottom: 1px solid rgba(192, 192, 192, 1);
 }
 

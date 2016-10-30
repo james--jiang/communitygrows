@@ -14,7 +14,9 @@
 
 
   = label :file, :category_id, 'Category'
-  = select :file, :category_id, @categories.map{ |category| [category.name, category.id]}.to_h 
+  - shown_categories = @categories.map { |category| (not category.hidden?) ? [category.name, category.id] : ["tmp", "tmp"] }.to_h
+  - shown_categories.delete("tmp")
+  = select :file, :category_id, shown_categories
 
   = submit_tag 'Submit'
 =link_to 'back', documents_path

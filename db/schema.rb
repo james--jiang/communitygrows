@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20161030191144) do
 
   create_table "categories", force: :cascade do |t|
     t.string  "name"
-    t.boolean "hidden"
+    t.boolean "hidden",      default: true,                              null:false
   end
 
   create_table "comments", force: :cascade do |t|

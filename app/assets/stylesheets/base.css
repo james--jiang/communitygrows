@@ -14,6 +14,7 @@ body {
 .content_without_nav h1 {
   text-align: center;
 }
+
 h1 {
   /*font-family: "Forum";*/
   font-size: 2.5em;
@@ -62,6 +63,15 @@ h2 {
 .comment .buttonSmall{
   background-color: #333;
 }
+
+#committeeTitle {
+  text-align: left;
+}
+#right {
+  text-align: right;
+  float: right;
+}
+
 #content {
   text-align: center;
 }

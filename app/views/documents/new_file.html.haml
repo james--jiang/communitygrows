@@ -14,8 +14,8 @@
   = label :file, :url, 'URL'
   = text_field :file, 'url'
 
-  = label :file, :category_id, 'Category'
-  = select :file, :category_id, @categories.map{ |category| [category.name, category.id]}.to_h 
+  = label :file, :category, 'Category'
+  = select :file, :category, @categories.map{ |category| [category.name, category.id]}.to_h 
 
   = submit_tag 'Submit'
 =link_to 'back', documents_path

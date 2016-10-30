@@ -1,5 +1,5 @@
 #docRepo
-  %h1 #{@file.title} Information
+  %h1 "\"#{@file.title}\" Information"
   
 
 - if flash[:notice] and flash[:notice]!="Signed in successfully."
@@ -35,5 +35,5 @@
   
 %p= link_to "Delete document", delete_file_path(@file.id), data: { confirm: 'Are you sure?' }
 
-=link_to 'back', documents_path
+=button_to 'back', documents_path, :method => :get
 

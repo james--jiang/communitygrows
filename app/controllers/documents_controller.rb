@@ -3,7 +3,7 @@ class DocumentsController < ActionController::Base
     before_filter :authenticate_user!
     
     def file_params
-      params.require(:file).permit(:title, :url, :committee_type, :category_id)
+      params.require(:file).permit(:title, :url, :committee_type, :category)
     end
   
     def index
@@ -31,7 +31,7 @@ class DocumentsController < ActionController::Base
                 if !(file[:url]=~/http(s)?:/)
                     file[:url]="http://"+file[:url]
                 end
-                category = Category.find(file[:category])
+                category = Category.find(file[:category_id])
                 @file = category.documents.create!(file_params)
                 if Rails.env.production?
                     User.all.each do |user| 

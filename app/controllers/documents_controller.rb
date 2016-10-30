@@ -31,7 +31,7 @@ class DocumentsController < ActionController::Base
                 if !(file[:url]=~/http(s)?:/)
                     file[:url]="http://"+file[:url]
                 end
-                category = Category.find(file[:category_id])
+                category = Category.find(file[:category])
                 @file = category.documents.create!(file_params)
                 if Rails.env.production?
                     User.all.each do |user| 

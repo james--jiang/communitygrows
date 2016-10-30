@@ -93,10 +93,20 @@ table {
   table-layout: fixed;
   white-space: nowrap;
 }
+#subtable {
+  border: 3px solid #dde;
+  padding: 1px;
+}
+hr {
+  border: 5px solid white;
+}
 thead {
   background-color: #227E9D;
   color: white;
   border-bottom: 3px solid #ddd;
+}
+#subthead {
+  background-color: #1492A1;
 }
 tr:nth-child(even) {
   background-color: #f2f2f2;
@@ -107,6 +117,35 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#category_name {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-decoration: none;
+}
+#category_name a:link {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(192, 192, 192, 0);
+  -webkit-transition: border 500ms ease;
+  -moz-transition: border 500ms ease;
+  -ms-transition: border 500ms ease;
+  -o-transition: border 500ms ease;
+  transition: border 500ms ease; 
+}
+#category_name a:visited {
+  text-decoration: none;
+  color: blue;
+  border-bottom: 1px solid rgba(192, 192, 192, 0);
+  -webkit-transition: border 500ms ease;
+  -moz-transition: border 500ms ease;
+  -ms-transition: border 500ms ease;
+  -o-transition: border 500ms ease;
+  transition: border 500ms ease; 
+}
+#category_name a:hover {
+  /*text-decoration: underline;*/
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
 link {
   size: 50px;
 }

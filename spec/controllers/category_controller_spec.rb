@@ -12,6 +12,12 @@ describe CategoryController do
 			get :new_category
 			expect(response).to render_template("new_category")
 		end
+		it 'redirects non-admin users' do
+            sign_in users(:user)
+            get :new_category
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 
 	describe 'create category' do
@@ -41,6 +47,13 @@ describe CategoryController do
             Rails.env.stub(:development? => true)
             post :create_category, :category => {:name => "Good Category"}
         end
+
+        it 'redirects non-admin users' do
+            sign_in users(:user)
+            post :create_category, :category => {:name => "Good Category"}
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 
 	describe 'edit category' do
@@ -48,6 +61,12 @@ describe CategoryController do
 			get :edit_category, :id => 25
 			expect(response).to render_template("edit_category")
 		end
+		it 'redirects non-admin users' do
+            sign_in users(:user)
+            get :edit_category, :id => 25
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 
 	describe 'update category' do
@@ -77,6 +96,13 @@ describe CategoryController do
             Rails.env.stub(:development? => true)
             put :update_category, {:id => 25, :category => {:name => "Good Category"}}
         end
+
+        it 'redirects non-admin users' do
+            sign_in users(:user)
+            put :update_category, {:id => 25, :category => {:name => "Good Category"}}
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 
 	describe 'delete category' do
@@ -88,6 +114,13 @@ describe CategoryController do
 		it "shows a flash delete message when category successfully deleted" do
             delete :delete_category, :id => 25
             flash[:notice].should eq("Category with name Crazy Category deleted successfully.")
+        end
+
+        it 'redirects non-admin users' do
+            sign_in users(:user)
+            delete :delete_category, :id => 25
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
         end
 	end
 
@@ -106,6 +139,13 @@ describe CategoryController do
 			expect_any_instance_of(Category).to receive(:hide)
 			get :hide_category, :id => 25
 		end
+
+		it 'redirects non-admin users' do
+            sign_in users(:user)
+            get :hide_category, :id => 25
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 
 	describe 'show category' do
@@ -123,6 +163,13 @@ describe CategoryController do
 			expect_any_instance_of(Category).to receive(:show)
 			get :show_category, :id => 25
 		end
+
+		it 'redirects non-admin users' do
+            sign_in users(:user)
+            get :show_category, :id => 25
+            response.should redirect_to('/users/sign_in')
+            sign_out users(:user)
+        end
 	end
 end
 

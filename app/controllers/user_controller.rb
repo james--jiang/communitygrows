@@ -27,6 +27,9 @@ class UserController < ActionController::Base
     end
 
     def updateEmailPreferences
+        # rewrite this method
+        # the model is already update through form_for 
+        # so the question is what do we do here
         @user = User.find(params[:user_id])
         if @user.update_attributes(user_params)
             flash[:notice] = "feifejiejwzibirvsd"

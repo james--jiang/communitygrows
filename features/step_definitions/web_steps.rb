@@ -31,6 +31,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
@@ -43,7 +44,6 @@ end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
-  sleep(0.2)
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
@@ -52,13 +52,11 @@ end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
-  sleep(0.2)
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   p link
   click_link(link)
-  sleep(0.2)
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|

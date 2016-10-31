@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161028174649) do
+=======
+ActiveRecord::Schema.define(version: 20161030191144) do
+>>>>>>> 8888202d73b761ceaae404df79051b1210735542
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -25,6 +29,11 @@ ActiveRecord::Schema.define(version: 20161028174649) do
     t.string   "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string  "name"
+    t.boolean "hidden"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -46,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161028174649) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "committee_type"
+    t.integer  "category_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -75,7 +85,7 @@ ActiveRecord::Schema.define(version: 20161028174649) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.boolean  "admin"
-    t.datetime "last_sign_in_at",        default: '2016-10-28 17:42:11', null: false
+    t.datetime "last_sign_in_at",        default: '2016-10-14 14:12:53', null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

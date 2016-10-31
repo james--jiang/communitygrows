@@ -25,6 +25,8 @@ module NavigationHelpers
       subcommittee_index_path("executive")
     when /the (CommunityGrows )?external affairs committee page$/ then
       subcommittee_index_path("external")
+    when /the (CommunityGrows )?category management page$/ then
+      category_index_path
       
     when /the edit user page for "([^"]*)"$/ then
       edit_user_path(User.find_by_email($1).id)

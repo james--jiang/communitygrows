@@ -61,6 +61,7 @@ RSpec.describe EventsController, type: :controller do
         end
     end
 
+
     describe 'delete event' do
     	it 'deletes the event' do
     		temp_id = Event.find_by_title("Soccer").id

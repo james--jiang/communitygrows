@@ -3,6 +3,7 @@ class DocumentCommitteeController < ActionController::Base
     before_filter :authenticate_user!
     
     def new_document
+        
     end
     
     def create_document

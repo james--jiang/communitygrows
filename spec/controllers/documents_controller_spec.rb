@@ -5,7 +5,8 @@ describe DocumentsController do
     fixtures :users
     before(:each) do
         sign_in users(:tester)
-        post :create_file, :file => {:title => "RepoTest", :url => "https://www.google.com/", :committee_type => 'boardoverview'}
+        Category.create!({:id => 1, :name => "Good Category"})
+        post :create_file, :file => {:title => "RepoTest", :url => "https://www.google.com/", :committee_type => 'boardoverview', :category_id => 1}
         @doc = Document.find_by_title("RepoTest")
     end
     
@@ -16,7 +17,7 @@ describe DocumentsController do
         end
         
         it "can create a new document" do
-            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview'}
+            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview', :category_id => 1}
             expect(Document.find_by_title("something").title).to eql("something")
         end
         
@@ -24,13 +25,13 @@ describe DocumentsController do
             post :create_file, :file => {:title => "something", :committee_type => :internal}
             flash[:notice].should eq("Populate all fields before submission.")
         
-            post :create_file, :file => {:title => "something", :url => "something", :committee_type => 'boardoverview'}
+            post :create_file, :file => {:title => "something", :url => "something", :committee_type => 'boardoverview', :category_id => 1}
             flash[:notice].should eq("Please enter a valid URL.")
         end
         
         it "development env sends email" do
             Rails.env.stub(:development? => true)
-            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview'}
+            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview', :category_id => 1}
         end
     end
     
@@ -47,24 +48,24 @@ describe DocumentsController do
         end
         
         it "edits a document" do
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview'}}
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
             page.should redirect_to(:documents)
             expect(Document.find(@doc.id).title).to eql("ccc")
         end
         
         it "checks for populated fields" do
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :committee_type => 'boardoverview'}}
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :committee_type => 'boardoverview', :category_id => 1}}
             flash[:notice].should eq("Populate all fields before submission.") 
         end
         
         it "checks validity of URL" do
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd", :committee_type => 'boardoverview'}}
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd", :committee_type => 'boardoverview', :category_id => 1}}
             flash[:notice].should eq("Please enter a valid URL.") 
         end
         
         it "development env sends email" do
             Rails.env.stub(:development? => true)
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview'}}
+            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
         end
     end
     

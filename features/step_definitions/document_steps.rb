@@ -11,4 +11,7 @@ end
 
 Given /^PENDING/ do
     pending
+    
+Given /a category called "([^"]*)"$/ do |category_name|
+	Category.create!({:name => category_name, :hidden => false})
 end

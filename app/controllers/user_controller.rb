@@ -42,22 +42,7 @@ class UserController < ActionController::Base
         # end
         
         if @user.update_attributes(user_params)
-            print "start here"
-            print @user.internal
-            if @user.internal == 1
-                @user.internal = true
-                @user.save!
-            end
-            print @user.internal
-            if @user.external == 1
-                @user.external = true
-                @user.save!
-            end
-            if @user.executive == 1
-                @user.executive = true
-                @user.save!
-            end
-            if display_error(@user)
+            if (@user.internal.to_i != 1) && (@user.external.to_i != 1) && (@user.executive.to_i != 1)
                 print "Huh"
                 flash[:notice] = "Please select at least your committee to receive emails from."
             else
@@ -70,25 +55,6 @@ class UserController < ActionController::Base
 
     end
     
-    def display_error(user)
-        print "ever"
-        if user.internal.nil? and user.external.nil? and user.executive.nil?
-            return true
-        elsif user.internal == 0 and user.external == 0 and user.executive == 0
-            return true
-        elsif user.internal.nil? and user.external == 0 and user.executive == 0
-            return true
-        elsif user.internal == 0 and user.external.nil? and user.executive == 0
-            return true
-        elsif user.internal == 0 and user.external == 0 and user.executive.nil?
-            return true
-        elsif user.internal == 0 and user.external.nil? and user.executive.nil?
-            return true
-        elsif user.internal.nil? and user.external == 0 and user.executive.nil?
-            return true
-        elsif user.internal.nil? and user.external.nil? and user.executive == 0
-            return true
-        end
-    end
+
 
 end

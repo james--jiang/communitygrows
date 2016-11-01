@@ -35,7 +35,7 @@ describe DocumentsController do
         end
     end
     
-    describe "acessing document page (index)" do
+    describe "accessing document page (index)" do
         it "accesses the index page successfully" do
             get :index
             response.should render_template(:index)
@@ -89,6 +89,32 @@ describe DocumentsController do
         
         it 'should render the doc info page' do
             response.should render_template(:info_file)
+        end
+    end
+    
+    describe "Mark as Read" do
+        before(:each) do
+            get :info_file, :format => @doc.id
+        end
+        
+        it 'redirect to the info_file page after marked as read changed' do
+            @request.env['HTTP_REFERER'] = info_file_path
+            post :mark_as_read, :id => @doc.id
+            expect(response).to redirect_to(info_file_path)
+        end
+        
+        it 'displays marked as read flash message if initially not read' do
+            @request.env['HTTP_REFERER'] = info_file_path
+            post :mark_as_read, :id => @doc.id
+            flash[:notice].should eq("Document [#{@doc.title}] marked as read.")
+        end
+        
+        it 'displays marked as not read flash message if initially read' do
+            @request.env['HTTP_REFERER'] = info_file_path
+            post :mark_as_read, :id => @doc.id
+            # Same controller method twice to mark as not read.
+            post :mark_as_read, :id => @doc.id
+            flash[:notice].should eq("Document [#{@doc.title}] marked as not read.")
         end
     end
 end   

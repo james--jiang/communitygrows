@@ -17,3 +17,21 @@
 //= require events
 //= require turbolinks
 //= require_tree
+
+document.getElementById('markasread').onclick = function() {
+    // access properties using this keyword
+    if ( this.checked ) {
+        // if checked ...
+        alert( "FUCK" );
+        //showEdit();
+    } else {
+        // if not checked ...
+        alert( "FUCK" );
+    }
+};
+
+var showEdit = function(){
+    $("#edit_doc_form").show();
+    $("#edit_doc_button").hide();
+};
+

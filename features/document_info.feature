@@ -27,11 +27,11 @@ Scenario: User should see Updated Time of Document
   
 # happy path
 Scenario: Admin can edit an existing file
-  Given PENDING
+  Given I am logged out
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
-  When I click the "Edit Document" button
+  When I follow "Click to Edit Document"
   When I fill in "file_title" with "new schedule"
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Submit"
@@ -39,31 +39,32 @@ Scenario: Admin can edit an existing file
   And I should see "new schedule"
 
 Scenario: User cannot edit document
-  Given PENDING
-  Then I should not see "Edit Document"
+  Then I should not see "Click to Edit Document"
 
 # sad path
 Scenario: Admin cannot edit an existing file without proper file name
-  Given PENDING
+  Given I am logged out
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
-  When I click the "Edit Document" button
+  When I follow "Click to Edit Document"
   When I fill in "file_title" with ""
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Submit"
   And I should see "Populate all fields before submission."
   
 Scenario: Mark as Read Field exists
-  Given PENDING
-  Then I should see "Mark as read"
+  Then I should see "Mark As Read"
+  
+Scenario: Email appears in the Read Status data table
+  Then I should see "dummy@dummy.com"
 
 # happy path
 @javascript
 Scenario: User can delete an announcement
-  When I follow "Delete document"
+  When I press "Delete document"
   And I confirm popup
-  # Then I should be on the document repository page
+  Then I should be on the document repository page
   Then I should see "deleted successfully"
   
   

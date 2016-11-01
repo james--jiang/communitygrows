@@ -27,23 +27,10 @@ class UserController < ActionController::Base
     end
 
     def updateEmailPreferences
-        # rewrite this method
-        # the model is already update through form_for 
-        # so the question is what do we do here
         @user = User.find(params[:user_id])
-        # if @user.internal == 1
-        #     @user.internal = true
-        # end
-        # if @user.external == 1
-        #     @user.external = true
-        # end
-        # if @user.executive == 1
-        #     @user.executive = true
-        # end
         
         if @user.update_attributes(user_params)
             if (@user.internal.to_i != 1) && (@user.external.to_i != 1) && (@user.executive.to_i != 1)
-                print "Huh"
                 flash[:notice] = "Please select at least your committee to receive emails from."
             else
                 flash[:notice] = "Email Preferences were updated."
@@ -52,9 +39,6 @@ class UserController < ActionController::Base
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         end
         redirect_to user_credentials_path(@user.id)    
-
-    end
-
-
+     end
 
 end

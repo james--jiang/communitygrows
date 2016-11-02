@@ -33,7 +33,7 @@ class UserController < ActionController::Base
             if (@user.internal.to_i != 1) && (@user.external.to_i != 1) && (@user.executive.to_i != 1)
                 flash[:notice] = "Please select at least your committee to receive emails from."
             else
-                flash[:notice] = "Email Preferences were updated."
+                flash[:notice] = "Your email preference settings have been updated."
             end
         else
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages

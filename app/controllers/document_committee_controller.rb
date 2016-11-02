@@ -36,8 +36,10 @@ class DocumentCommitteeController < ActionController::Base
                     if user.executive.to_i == 1
                         committe_user_executive = "executive"
                     end
-                    
-                    if @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive
+
+                    if current_user.admin?
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
                          NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
                     end
                     ##########################################################
@@ -83,8 +85,10 @@ class DocumentCommitteeController < ActionController::Base
                         committe_user_executive = "executive"
                     end
                     
-                    if @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive
-                         NotificationMailer.document_update_email(user, Document.find_by_title(@target_document.id)).deliver
+                    if current_user.admin?
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
                     end
                     ##########################################################
                 end

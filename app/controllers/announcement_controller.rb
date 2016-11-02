@@ -34,8 +34,10 @@ class AnnouncementController < ActionController::Base
                     committe_user_executive = "executive"
                 end
                     
-                if @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive
-                    NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
+                if current_user.admin?
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
                 end
                 ##########################################################
             end
@@ -76,8 +78,10 @@ class AnnouncementController < ActionController::Base
                     committe_user_executive = "executive"
                 end
                     
-                if @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive
-                    NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
+                if current_user.admin?
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
                 end
                 ##########################################################
             end

@@ -30,7 +30,7 @@ class UserController < ActionController::Base
         @user = User.find(params[:user_id])
         
         if @user.update_attributes(user_params)
-            if (@user.internal.to_i != 1) && (@user.external.to_i != 1) && (@user.executive.to_i != 1)
+            if (@user.internal != true) && (@user.external != true) && (@user.executive != true)
                 flash[:notice] = "Please select at least your committee to receive emails from."
             else
                 flash[:notice] = "Your email preference settings have been updated."

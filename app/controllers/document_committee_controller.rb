@@ -23,17 +23,16 @@ class DocumentCommitteeController < ActionController::Base
             flash[:notice] = 'Document List creation successful and email was successfully sent.'
             if Rails.env.production?
                 User.all.each do |user|
-                    # my addition ####################################
                     committe_user_internal = None
                     committe_user_external = None
                     committe_user_executive = None
-                    if user.internal.to_i == 1
+                    if user.internal == true
                         committe_user_internal = "internal"
                     end
-                    if user.external.to_i == 1
+                    if user.external == true
                         committe_user_external = "external"
                     end
-                    if user.executive.to_i == 1
+                    if user.executive == true
                         committe_user_executive = "executive"
                     end
 
@@ -42,7 +41,6 @@ class DocumentCommitteeController < ActionController::Base
                     elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
                          NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
                     end
-                    ##########################################################
                 end
             end
             redirect_to subcommittee_index_path(@committee_type)
@@ -75,13 +73,13 @@ class DocumentCommitteeController < ActionController::Base
                     committe_user_internal = None
                     committe_user_external = None
                     committe_user_executive = None
-                    if user.internal.to_i == 1
+                    if user.internal == true
                         committe_user_internal = "internal"
                     end
-                    if user.external.to_i == 1
+                    if user.external == true
                         committe_user_external = "external"
                     end
-                    if user.executive.to_i == 1
+                    if user.executive == true
                         committe_user_executive = "executive"
                     end
                     

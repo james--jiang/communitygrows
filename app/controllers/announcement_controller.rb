@@ -24,13 +24,13 @@ class AnnouncementController < ActionController::Base
                 committe_user_internal = None
                 committe_user_external = None
                 committe_user_executive = None
-                if user.internal.to_i == 1
+                if user.internal == true
                     committe_user_internal = "internal"
                 end
-                 if user.external.to_i == 1
+                 if user.external == true
                     committe_user_external = "external"
                 end
-                 if user.executive.to_i == 1
+                 if user.executive == true
                     committe_user_executive = "executive"
                 end
                     
@@ -68,13 +68,13 @@ class AnnouncementController < ActionController::Base
                 committe_user_internal = None
                 committe_user_external = None
                 committe_user_executive = None
-                if user.internal.to_i == 1
+                if user.internal == true
                     committe_user_internal = "internal"
                 end
-                 if user.external.to_i == 1
+                 if user.external == true
                     committe_user_external = "external"
                 end
-                 if user.executive.to_i == 1
+                 if user.executive == true
                     committe_user_executive = "executive"
                 end
                     

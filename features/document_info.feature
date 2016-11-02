@@ -26,6 +26,7 @@ Scenario: User should see Updated Time of Document
   Then I should see "Updated At"
   
 # happy path
+@javascript
 Scenario: Admin can edit an existing file
   Given I am logged out
   Given a logged in admin
@@ -42,6 +43,7 @@ Scenario: User cannot edit document
   Then I should not see "Click to Edit Document"
 
 # sad path
+@javascript
 Scenario: Admin cannot edit an existing file without proper file name
   Given I am logged out
   Given a logged in admin
@@ -58,13 +60,25 @@ Scenario: Mark as Read Field exists
   
 Scenario: Email appears in the Read Status data table
   Then I should see "dummy@dummy.com"
+  
+Scenario: Selecting mark as read should change Not Read to Read
+  When I check "markasread"
+  Then I should see "Read"
+  
 
 # happy path
 @javascript
 Scenario: User can delete an announcement
+  Given I am logged out
+  Given a logged in admin
+  And I am on the document repository page
+  When I follow "schedule"
   When I press "Delete document"
   And I confirm popup
   Then I should be on the document repository page
   Then I should see "deleted successfully"
+  
+Scenario: User cannot edit document
+  Then I should not see "Delete document"
   
   

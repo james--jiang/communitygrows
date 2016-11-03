@@ -66,4 +66,6 @@ describe DocumentCommitteeController do
             response.should redirect_to(subcommittee_index_path(:committee_type => @doc.committee_type))
         end
     end
+
+    
 end

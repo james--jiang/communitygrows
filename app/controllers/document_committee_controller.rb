@@ -24,9 +24,9 @@ class DocumentCommitteeController < ActionController::Base
             flash[:notice] = 'Document List creation successful and email was successfully sent.'
             if Rails.env.production?
                 User.all.each do |user|
-                    committe_user_internal = None
-                    committe_user_external = None
-                    committe_user_executive = None
+                    committe_user_internal = ""
+                    committe_user_external = ""
+                    committe_user_executive = ""
                     if user.internal == true
                         committe_user_internal = "internal"
                     end

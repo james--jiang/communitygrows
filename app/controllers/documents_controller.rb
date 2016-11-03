@@ -1,6 +1,6 @@
 class DocumentsController < ActionController::Base
     layout "base"
-    before_filter :authenticate_user!
+    before_action :authenticate_user!
     
     def file_params
       params.require(:file).permit(:title, :url, :committee_type)
@@ -42,17 +42,17 @@ class DocumentsController < ActionController::Base
     end
     
     
-    def edit_file
-       @id = params[:format] 
-       @file = Document.find @id
-    end
+    # def edit_file
+    #    @id = params[:format] 
+    #    @file = Document.find @id
+    # end
     
     def update_file
         @target_file = Document.find params[:format]
         file = params[:file]
         if file[:title].to_s == "" or file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
-            redirect_to edit_file_path(params[:format])
+            redirect_to info_file_path(params[:format])
         elsif !(file[:url]=~/.com(.*)/)
             flash[:notice] = "Please enter a valid URL."
             redirect_to new_file_path

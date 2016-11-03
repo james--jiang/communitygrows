@@ -108,7 +108,7 @@ end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
-    page.should have_content(text)
+    expect(page).to have_content(text)
   else
     assert page.has_content?(text)
   end
@@ -118,7 +118,7 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
   
   if page.respond_to? :should
-    page.should have_xpath('//*', :text => regexp)
+    expect(page).to have_xpath('//*', :text => regexp)
   else
     assert page.has_xpath?('//*', :text => regexp)
   end
@@ -126,7 +126,7 @@ end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   if page.respond_to? :should
-    page.should have_no_content(text)
+    expect(page).to have_no_content(text)
   else
     assert page.has_no_content?(text)
   end
@@ -136,7 +136,7 @@ Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
 
   if page.respond_to? :should
-    page.should have_no_xpath('//*', :text => regexp)
+    expect(page).to have_no_xpath('//*', :text => regexp)
   else
     assert page.has_no_xpath?('//*', :text => regexp)
   end
@@ -147,7 +147,7 @@ Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     if field_value.respond_to? :should
-      field_value.should =~ /#{value}/
+      expect(field_value).to =~ /#{value}/
     else
       assert_match(/#{value}/, field_value)
     end
@@ -159,7 +159,7 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     if field_value.respond_to? :should_not
-      field_value.should_not =~ /#{value}/
+      expect(field_value).not_to =~ /#{value}/
     else
       assert_no_match(/#{value}/, field_value)
     end
@@ -175,7 +175,7 @@ Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_me
   error_class = using_formtastic ? 'error' : 'field_with_errors'
 
   if classes.respond_to? :should
-    classes.should include(error_class)
+    expect(classes).to include(error_class)
   else
     assert classes.include?(error_class)
   end
@@ -183,9 +183,9 @@ Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_me
   if page.respond_to?(:should)
     if using_formtastic
       error_paragraph = element.find(:xpath, '../*[@class="inline-errors"][1]')
-      error_paragraph.should have_content(error_message)
+      expect(error_paragraph).to have_content(error_message)
     else
-      page.should have_content("#{field.titlecase} #{error_message}")
+      expect(page).to have_content("#{field.titlecase} #{error_message}")
     end
   else
     if using_formtastic
@@ -201,8 +201,8 @@ Then /^the "([^"]*)" field should have no error$/ do |field|
   element = find_field(field)
   classes = element.find(:xpath, '..')[:class].split(' ')
   if classes.respond_to? :should
-    classes.should_not include('field_with_errors')
-    classes.should_not include('error')
+    expect(classes).not_to include('field_with_errors')
+    expect(classes).not_to include('error')
   else
     assert !classes.include?('field_with_errors')
     assert !classes.include?('error')
@@ -213,7 +213,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, pa
   with_scope(parent) do
     field_checked = find_field(label)['checked']
     if field_checked.respond_to? :should
-      field_checked.should be_true
+      expect(field_checked).to be_true
     else
       assert field_checked
     end
@@ -224,7 +224,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   with_scope(parent) do
     field_checked = find_field(label)['checked']
     if field_checked.respond_to? :should
-      field_checked.should be_false
+      expect(field_checked).to be_false
     else
       assert !field_checked
     end
@@ -234,7 +234,7 @@ end
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
-    current_path.should == path_to(page_name)
+    expect(current_path).to eq path_to(page_name)
   else
     assert_equal path_to(page_name), current_path
   end
@@ -247,7 +247,7 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')} 
   
   if actual_params.respond_to? :should
-    actual_params.should == expected_params
+    expect(actual_params).to eq expected_params
   else
     assert_equal expected_params, actual_params
   end

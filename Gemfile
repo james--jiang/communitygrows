@@ -8,7 +8,7 @@ gem 'devise'
 
 gem 'acts_as_tree'
 
-gem 'rake', '11.3.0'
+gem 'rake'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -61,6 +61,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'autotest-rails'

@@ -27,7 +27,7 @@ Scenario: User should see Updated Time of Document
 Scenario: User can edit an existing file
   When I fill in "file_title" with "new schedule"
   When I fill in "file_url" with "mock.com/schedule"
-  And I press "Submit"
+  And I press "Save changes"
   Then I should be on the document repository page
   And I should see "new schedule"
 
@@ -35,12 +35,12 @@ Scenario: User can edit an existing file
 Scenario: User cannot edit an existing file without proper file name
   When I fill in "file_title" with ""
   When I fill in "file_url" with "mock.com/schedule"
-  And I press "Submit"
+  And I press "Save changes"
   And I should see "Populate all fields before submission."
 
 # happy path
 @javascript
-Scenario: User can delete an announcement
+Scenario: User can delete a document
   When I follow "Delete document"
   And I confirm popup
   # Then I should be on the document repository page

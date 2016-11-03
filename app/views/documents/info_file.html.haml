@@ -1,18 +1,9 @@
 :javascript
-  var markAsRead = function(){
-    
-      $.post("mark_as_read",
-        {
-            id: document.getElementById("markasread").value,
-        },
-        function(data, status){
-        });
-  };
   var showEdit = function(){
     $("#edit_doc_form").show();
     $("#edit_doc_button").hide();
   };
-  
+
 #docRepo
   %h1 "#{@file.title}" Information
   
@@ -36,7 +27,7 @@
   
   
 %h2
-  %table
+  %table#mark_as_read_table
     %thead
       %tr
         %td User name

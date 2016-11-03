@@ -54,13 +54,6 @@ Scenario: Admin cannot edit an existing file without proper file name
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Submit"
   And I should see "Populate all fields before submission."
-
-Scenario: Should have Not Read as Default
-  Then I should see "Not Read" in Read Status Table   
-
-Scenario: Selecting mark as read should change Not Read to Read
-  When I check "markasread"
-  Then I should see "Read" in Read Status Table 
   
 # happy path
 @javascript

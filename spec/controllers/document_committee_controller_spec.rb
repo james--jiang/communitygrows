@@ -54,8 +54,8 @@ describe DocumentCommitteeController do
             response.should redirect_to(subcommittee_index_path(:committee_type => @doc.committee_type))
         end
         
-        it "development env sends email" do
-            Rails.env.stub(:development? => true)
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
             put :update_document, :document => {:id => @doc.id}, :title => @doc.title, :url => "new_url.com", :committee_type => @doc.committee_type 
         end
     end

@@ -28,6 +28,11 @@ Given /^a logged in user$/ do
   click_button "Log in"
 end
 
+Given /^I am logged out$/ do
+  visit "/users/sign_in"
+  click_link("Sign out", match: :first)
+end
+
 Given /^I edit password$/ do
   fail "Unimplemented"
 end

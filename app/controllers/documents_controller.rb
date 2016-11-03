@@ -10,12 +10,15 @@ class DocumentsController < ActionController::Base
         # @documents = Document.all
         # @document_list = Document.order(updated_at: :DESC)
         @categories = Category.all
+        @curr_user = current_user
     end
     
     def info_file
         @id = params[:format] 
         @file = Document.find @id
         @categories = Category.all
+        @users = User.all.order(:email)
+        @who_has_read = @file.users
     end
     
     def create_file
@@ -88,4 +91,21 @@ class DocumentsController < ActionController::Base
         #default: render 'new' template
         @categories = Category.all
     end
+    
+    def mark_as_read
+        @id = params[:id]
+        @file = Document.find @id
+        @who_has_read = @file.users
+        @curr_user = current_user
+        if @curr_user.documents.exists?(@file)
+            @curr_user.documents.delete(@file)
+            flash[:notice] = "Document [#{@file.title}] marked as not read."
+        else
+            @curr_user.documents<<(@file)
+            flash[:notice] = "Document [#{@file.title}] marked as read."
+        end
+        redirect_to :back
+    end
+    
+    
 end

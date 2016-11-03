@@ -59,6 +59,11 @@ When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
 
+When /^(?:|I )fill in hidden field "([^"]*)" with "([^"]*)"$/ do |field, value|
+  page.all(".form_tag[id='edit_doc_form']", :visible => true)
+  fill_in(field, :with => value)
+end
+
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end

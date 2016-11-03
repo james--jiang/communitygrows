@@ -1,7 +1,13 @@
-When /I (un)?check the following preferences: (.*)/ do |uncheck, preference_list|
-  
+When /(.*) should receive: (.*) email/ do |email, preference_list|
+	u = User.find_by(email:email)
+	print(u)
+	preference_list.split(",").each do |p|
+		if p[1,p.length-2] == "internal"
+			expect(u.internal).to be(false)
+		end
+	end
 end
 
-When /I should receive: (.*) email/ do |preference_list|
-
+When /I should see correct flash message "([^"]*)"$/ do |message|
+	page.should have_css('flashNotice',text: message)
 end

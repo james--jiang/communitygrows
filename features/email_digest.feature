@@ -15,48 +15,63 @@ Background: users in databse
     # | zach@gmail.com    | true       | 2016-03-17 17:44:13  | 12341234     | 12341234                  |
     # | tonylee@gmail.com | false      | 2016-03-14 15:32:00  | 43124312     | 43124312                  |
     # | jae@berkeley.edu  | false      | 2016-03-18 22:12:11  | 54175417     | 54175417                  |
+  Given a logged in user
+  And I am on the dashboard page
+
 Scenario: Happy Path
+
   Given I am on the account details page for "james@gmail.com"
-  When I check "internal"
+
+  When I check "user_internal"
   And I press "Confirm"
-  Then I am on the account details page
-  And I should see "Your email preference settings have been updated."
-  And I should receive: "internal" email
+  Then I should see "Your email preference settings have been updated."
+  And I am on the account details page for "james@gmail.com"
+  Then the "user_internal" checkbox should be checked
   
   Given I am on the account details page for "james@gmail.com"
-  When I check the following preferences: "internal", "executive"
+  When I check "user_internal" 
+  And I check "user_executive"
   And I press "Confirm"
-  Then I am on the account details page for "james@gmail.com"
-  And I should see "Your email preference settings have been updated."
-  And I should receive: internal, executive email
-  
+  Then I should see "Your email preference settings have been updated."
+  And I am on the account details page for "james@gmail.com"
+  Then the "user_internal" checkbox should be checked
+  And the "user_executive" checkbox should be checked
+
   Given I am on the account details page for "james@gmail.com"
-  When I check "external"
+  When I check "user_external"
   And I press "Confirm"
-  Then I am on the account details page for "james@gmail.com"
-  And I should see "Your email preference settings have been updated."
-  And I should receive: "external" email
-  
+  Then I should see "Your email preference settings have been updated."
+  And I am on the account details page for "james@gmail.com"
+  Then the "user_external" checkbox should be checked
+
   Given I am on the account details page for "james@gmail.com"
-  When I check the following preferences: "internal", "external", "executive"
+  When I check "user_internal"
+  And I check "user_external"
+  And I check "user_executive"
   And I press "Confirm"
-  Then I am on the account details page for "james@gmail.com"
-  And I should see "Your email preference settings have been updated."
-  And I should receive: "internal", "external", "executive" email
-  
+  Then I should see "Your email preference settings have been updated."
+  And I am on the account details page for "james@gmail.com"
+  Then the "user_internal" checkbox should be checked
+  And the "user_executive" checkbox should be checked
+  And the "user_external" checkbox should be checked
+
+
   Given I am on the account details page for "james@gmail.com"
-  When I check the following preferences: "external", "executive"
+  When I check "user_external" 
+  And I check "user_executive"
   And I press "Confirm"
-  Then I am on the account details page for "james@gmail.com"
-  And I should see "Your email preference settings have been updated."
-  And I should receive: "external", "executive" email
+  Then I should see "Your email preference settings have been updated."
+  And the "user_executive" checkbox should be checked
+  And the "user_external" checkbox should be checked
   
 Scenario: Sad Path
   Given I am on the account details page for "james@gmail.com"
-  When I check " "
+  When I uncheck "user_external"
+  And I uncheck "user_internal"
+  And I uncheck "user_executive"
   And I press "Confirm"
-  Then I am on the account details page
-  And I should see "Please select at least your committee to receive emails from."
+  Then I should see "Please select at least your committee to receive emails from."
+  And I am on the account details page for "james@gmail.com"
     
   
   

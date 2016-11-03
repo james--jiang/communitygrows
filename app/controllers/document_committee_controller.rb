@@ -23,8 +23,25 @@ class DocumentCommitteeController < ActionController::Base
             Document.create!(:title => @title, :url => @url, :committee_type => @committee_type)
             flash[:notice] = 'Document List creation successful and email was successfully sent.'
             if Rails.env.production?
-                User.all.each do |user| 
-                    NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                User.all.each do |user|
+                    committe_user_internal = ""
+                    committe_user_external = ""
+                    committe_user_executive = ""
+                    if user.internal == true
+                        committe_user_internal = "internal"
+                    end
+                    if user.external == true
+                        committe_user_external = "external"
+                    end
+                    if user.executive == true
+                        committe_user_executive = "executive"
+                    end
+
+                    if current_user.admin?
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    end
                 end
             end
             redirect_to subcommittee_index_path(@committee_type)
@@ -50,9 +67,29 @@ class DocumentCommitteeController < ActionController::Base
             @committee_type = params[:committee_type]
             @target_document = Document.find params[:document][:id]
             @target_document.update_attributes!(:title => @title, :url => @url, :committee_type => @committee_type)
+            # how do we know an update was made by an admin
             if Rails.env.production?
-                User.all.each do |user| 
-                    NotificationMailer.document_update_email(user, Document.find_by_title(@target_document.id)).deliver
+                User.all.each do |user|
+                    # my addition ####################################
+                    committe_user_internal = ""
+                    committe_user_external = ""
+                    committe_user_executive = ""
+                    if user.internal == true
+                        committe_user_internal = "internal"
+                    end
+                    if user.external == true
+                        committe_user_external = "external"
+                    end
+                    if user.executive == true
+                        committe_user_executive = "executive"
+                    end
+                    
+                    if current_user.admin?
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                         NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                    end
+                    ##########################################################
                 end
             end
             flash[:notice] = "Executive Document List with title [#{@target_document.title}] updated successfully and email was successfully sent."

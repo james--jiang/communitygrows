@@ -10,6 +10,7 @@ class DocumentsController < ActionController::Base
         # @documents = Document.all
         # @document_list = Document.order(updated_at: :DESC)
         @categories = Category.all
+        @curr_user = current_user
     end
     
     def info_file

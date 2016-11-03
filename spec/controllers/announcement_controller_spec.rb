@@ -39,19 +39,19 @@ describe AnnouncementController do
             #     Rails.env.stub(:production? => true)
             # end
             it 'internal' do
-                byebug
-                Rails.env.stub(:production? => true)
-                expect(NotificationMailer).to receive(:new_document_email)
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
                 post :create_announcement, :committee_type => :internal, :title => "a"
             end
             it 'external' do
-                Rails.env.stub(:production? => true)
-                expect(NotificationMailer).to receive(:new_document_email)
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+
                 post :create_announcement, :committee_type => :external, :title => "a"
             end
             it 'executive' do
-                Rails.env.stub(:production? => true)
-                expect(NotificationMailer).to receive(:new_document_email)
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
                 post :create_announcement, :committee_type => :executive, :title => "a"
             end
         end
@@ -83,21 +83,21 @@ describe AnnouncementController do
                 Rails.env.stub(:production? => true)
             end
             it 'internal' do
-                Rails.env.stub(:production? => true)
-                expect(NotificationMailer).to receive(:new_document_email)
-                put :update_announcement, :title => nil, :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
             end
             it 'external' do
-                Rails.env.stub(:production? => true)
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
                 @a.committee_type = :external
-                expect(NotificationMailer).to receive(:new_document_email)
-                put :update_announcement, :title => nil, :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
             end
             it 'executive' do
-                Rails.env.stub(:production? => true)
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
                 @a.committee_type = :executive
-                expect(NotificationMailer).to receive(:new_document_email)
-                put :update_announcement, :title => nil, :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
             end
         end
     end

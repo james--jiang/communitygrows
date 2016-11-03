@@ -1,20 +1,11 @@
 :javascript
-  var markAsRead = function(){
-    
-      $.post("mark_as_read",
-        {
-            id: document.getElementById("markasread").value,
-        },
-        function(data, status){
-        });
-  };
   var showEdit = function(){
     $("#edit_doc_form").show();
     $("#edit_doc_button").hide();
   };
-  
+
 #docRepo
-  %h1 "\"#{@file.title}\" Information"
+  %h1 "#{@file.title}" Information
   
 
 - if flash[:notice] and flash[:notice]!="Signed in successfully."
@@ -31,12 +22,12 @@
   #{@file.updated_at.strftime("%m/%d/%Y %l:%M %p")}
 
 %h3
-  %label
-  %input{:name => "markasread", :type => "checkbox", :value => "#{@file.id}", :id => "markasread", :onclick => "markAsRead()", :checked => (@who_has_read.include?(current_user))}/
-  Mark As Read
+  %label Mark As Read
+  %input{:name => "markasread", :type => "checkbox", :value => "#{@file.id}", :id => "markasread", :onclick => "markAsRead()", :checked => (@who_has_read.include?(current_user))}
+  
   
 %h2
-  %table
+  %table#mark_as_read_table
     %thead
       %tr
         %td User name
@@ -75,7 +66,8 @@
     = submit_tag 'Submit'
 
 
-%p= button_to "Delete document", delete_file_path(@file.id), :method => :delete, data: { confirm: 'Are you sure?' }
+- if current_user.admin
+  %p= button_to "Delete document", delete_file_path(@file.id), :method => :delete, data: { confirm: 'Are you sure?' }
 
 =button_to 'back', documents_path, :method => :get
 

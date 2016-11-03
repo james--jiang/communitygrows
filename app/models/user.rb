@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
     attr_with_defaults = {:admin => false}.merge(attributes)
     super(attr_with_defaults)
   end
-
+  
+  def has_read?(doc)
+    return (self.documents.include?(doc))
+  end
 
 end

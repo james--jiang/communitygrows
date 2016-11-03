@@ -3,7 +3,7 @@ class UserController < ActionController::Base
     before_filter :authenticate_user!
     
     def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.require(:user).permit(:email, :password, :password_confirmation, :internal, :external, :executive)
     end
     
     def index
@@ -14,6 +14,7 @@ class UserController < ActionController::Base
     end
     
     def update
+
         @user = User.find(params[:user_id])
         if @user.update_attributes(user_params)
             bypass_sign_in(@user)
@@ -24,4 +25,20 @@ class UserController < ActionController::Base
             redirect_to user_credentials_path(@user.id)    
         end
     end
+
+    def updateEmailPreferences
+        @user = User.find(params[:user_id])
+        
+        if @user.update_attributes(user_params)
+            if (@user.internal != true) && (@user.external != true) && (@user.executive != true)
+                flash[:notice] = "Please select at least your committee to receive emails from."
+            else
+                flash[:notice] = "Your email preference settings have been updated."
+            end
+        else
+            flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
+        end
+        redirect_to user_credentials_path(@user.id)    
+     end
+
 end

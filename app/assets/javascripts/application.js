@@ -18,20 +18,15 @@
 //= require turbolinks
 //= require_tree
 
-document.getElementById('markasread').onclick = function() {
-    // access properties using this keyword
-    if ( this.checked ) {
-        // if checked ...
-        alert( "FUCK" );
-        //showEdit();
-    } else {
-        // if not checked ...
-        alert( "FUCK" );
-    }
+var markAsRead = function(){
+    $.post("mark_as_read", {
+        id: document.getElementById("markasread").value,
+    },
+    function(data, status){
+    });
 };
 
-var showEdit = function(){
-    $("#edit_doc_form").show();
-    $("#edit_doc_button").hide();
-};
-
+// var showEdit = function(){
+//     $("#edit_doc_form").show();
+//     $("#edit_doc_button").hide();
+// };

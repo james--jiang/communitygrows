@@ -19,8 +19,25 @@ class AnnouncementController < ActionController::Base
         @content = params[:content]
         Announcement.create!(:title => @title, :content => @content, :committee_type => @committee_type)
         if Rails.env.production?
-            User.all.each do |user| 
-                NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
+            User.all.each do |user|
+                committe_user_internal = ""
+                committe_user_external = ""
+                committe_user_executive = ""
+                if user.internal == true
+                    committe_user_internal = "internal"
+                end
+                 if user.external == true
+                    committe_user_external = "external"
+                end
+                 if user.executive == true
+                    committe_user_executive = "executive"
+                end
+                    
+                if current_user.admin?
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                end
             end
         end
         flash[:notice] = "#{@committee_type.capitalize} Announcement creation successful and email was successfully sent."
@@ -44,8 +61,25 @@ class AnnouncementController < ActionController::Base
         end
         @target_announcement.update_attributes!(:title => @title, :content => @content, :committee_type => @committee_type)
         if Rails.env.production?
-            User.all.each do |user| 
-                NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
+            User.all.each do |user|
+                committe_user_internal = ""
+                committe_user_external = ""
+                committe_user_executive = ""
+                if user.internal == true
+                    committe_user_internal = "internal"
+                end
+                 if user.external == true
+                    committe_user_external = "external"
+                end
+                 if user.executive == true
+                    committe_user_executive = "executive"
+                end
+                    
+                if current_user.admin?
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
+                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
+                end
             end
         end
         flash[:notice] = "Announcement with title [#{@target_announcement.title}] updated successfully and email was successfully sent"

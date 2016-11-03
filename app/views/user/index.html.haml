@@ -25,3 +25,17 @@
     <br/>
     = submit_tag 'Submit', :class => "button"
   =link_to 'Back', dashboard_index_path, :class => "button"
+%h1{:align=>"center",:style=>"margin-top:100px"} Email Preferences
+
+#form
+  = form_for @user, :url => update_user_email_preference_path(@user),  html: { method: :post } do |f|
+    = f.label "Internal: "
+    = f.check_box :internal
+    <br/>
+    = f.label "External: "
+    = f.check_box :external
+    <br/>
+    = f.label "Executive: "
+    = f.check_box :executive
+    <br/>
+    = f.submit "Confirm", :class => "button"

@@ -6,8 +6,8 @@ Feature: successfully CRUD on the document repository
   So that I can not only access the information but contribute to them
 
 Background: user is on the document repository page
-  
   Given a logged in user
+  And a category called "Ctgy"
   And I am on the document repository page
 
 # happy path
@@ -15,6 +15,7 @@ Scenario: User can add a new document
   When I follow "Add new file"
   Then I fill in "file_title" with "schedule"
   Then I fill in "file_url" with "mock.com/schedule"
+  And I select "Ctgy" from "file_category_id"
   And I press "Submit"
   Then I should be on the document repository page
   And I should see "schedule"
@@ -23,15 +24,7 @@ Scenario: User can add a new document
 Scenario: User can't add a new document without proper file name
   When I follow "Add new file"
   Then I fill in "file_url" with "mock.com/schedule"
+  And I select "Ctgy" from "file_category_id"
   And I press "Submit"
   And I should see "Populate all fields before submission."
-  
-Scenario: see six categories
-  When I am on the document repository page
-  Then I should see "About Community Grows"
-  Then I should see "Board Overview"
-  Then I should see "Board Activities"
-  Then I should see "Budgets and Finances"
-  Then I should see "AB Meetings"
-  Then I should see "Board Resources"
   

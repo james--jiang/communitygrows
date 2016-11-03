@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20161102231348) do
 
+
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
@@ -25,6 +26,11 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.string   "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string  "name"
+    t.boolean "hidden"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -46,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "committee_type"
+    t.integer  "category_id"
   end
 
   create_table "events", force: :cascade do |t|

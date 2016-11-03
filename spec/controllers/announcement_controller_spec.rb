@@ -27,6 +27,35 @@ describe AnnouncementController do
             response.should redirect_to(subcommittee_index_path(:committee_type => :internal))
         end
     end
+    describe 'create announcement' do
+        it 'doesn\'t accept an empty title' do
+            post :create_announcement, :committee_type => :internal, :title => ''
+            expect(flash[:notice]).to eq("Title field cannot be left blank.")
+            expect(response).to redirect_to(new_committee_announcement_path(:internal))
+        end
+
+        describe 'emails' do
+            # before(:each) do
+            #     Rails.env.stub(:production? => true)
+            # end
+            it 'internal' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                post :create_announcement, :committee_type => :internal, :title => "a"
+            end
+            it 'external' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+
+                post :create_announcement, :committee_type => :external, :title => "a"
+            end
+            it 'executive' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                post :create_announcement, :committee_type => :executive, :title => "a"
+            end
+        end
+    end
     describe 'edit announcement' do
         it 'renders edit announcment page' do
             get :edit_announcement, :announcement_id => @a.id, :committee_type => @a.committee_type
@@ -48,6 +77,31 @@ describe AnnouncementController do
             
         end
     end
+    describe 'update announcement' do
+        describe 'emails' do
+            before(:each) do
+                Rails.env.stub(:production? => true)
+            end
+            it 'internal' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+            end
+            it 'external' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                @a.committee_type = :external
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+            end
+            it 'executive' do
+                expect(Rails.env).to receive(:production?).and_return(true)
+                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                @a.committee_type = :executive
+                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+            end
+        end
+    end
+
     describe 'search' do
         it 'searches right' do 
             post :search_announcements, :search => @a.title

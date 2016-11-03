@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.boolean  "admin"
-    t.datetime "last_sign_in_at",        default: '2016-10-28 17:42:11', null: false
+    t.datetime "last_sign_in_at",        default: '2016-10-14 14:12:53', null: false
     t.boolean  "internal"
     t.boolean  "external"
     t.boolean  "executive"

@@ -68,6 +68,7 @@ RSpec.describe EventsController, type: :controller do
     		post :delete, :id => Event.find_by_title("Soccer").id
     		expect(Event.find_by_id(temp_id)).to be(nil)
     	end
+>>>>>>> 9a8c28e7ebb4be639dfdadf6b1402c417315e488
     end
 end
 

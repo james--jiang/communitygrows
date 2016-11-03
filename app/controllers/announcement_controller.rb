@@ -10,6 +10,7 @@ class AnnouncementController < ActionController::Base
     end
         
     def create_announcement
+        byebug
         @title = params[:title]
         @committee_type = params[:committee_type]
         if @title.nil? || @title.empty?

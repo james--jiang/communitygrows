@@ -26,6 +26,7 @@ Scenario: User should see Updated Time of Document
   Then I should see "Updated At"
   
 # happy path
+@javascript
 Scenario: Admin can edit an existing file
   Given I am logged out
   Given a logged in admin
@@ -42,6 +43,7 @@ Scenario: User cannot edit document
   Then I should not see "Click to Edit Document"
 
 # sad path
+@javascript
 Scenario: Admin cannot edit an existing file without proper file name
   Given I am logged out
   Given a logged in admin

@@ -159,18 +159,3 @@ table tr:last-child td:last-child {
 /*****************/
 /*  Comment CSS  */
 /*****************/
-.comment {
-  margin-top: 10px;
-}
-
-.comment-delete{
-  display: inline-block;
-}
-
-#comments {
-  margin-left: 1%;
-  margin-right: 3%;
-  display: block;
-  width: 100%;
-  word-wrap: break-word;
-}

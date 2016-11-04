@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container.well
   %h1 Edit Account Credentials
   - if flash[:notice]
@@ -13,8 +14,21 @@
     Back
   <br>
   <br>
+=======
+%h1 Edit Account Credentials
+- if flash[:notice]
+  - if (flash[:notice].respond_to? :each)
+    - flash[:notice].each do |msg|
+      #flashNotice  
+        = msg
+  -else
+    #flashNotice
+      = flash[:notice]
+</br>
+>>>>>>> master
 
   = form_tag update_user_credentials_path(@user), :method => :put do
+<<<<<<< HEAD
     .form-group
       = label :user, :email, "Email: "
       = email_field :user, 'email', :placeholder => @user.email, class: 'form-control'
@@ -26,3 +40,33 @@
       = password_field :user, 'password_confirmation', class: 'form-control'
     .form-group
       = submit_tag 'Submit', :class => "btn btn-success"
+=======
+    = label :user, :email, "Email: "
+    #field
+    = text_field :user, 'email', :placeholder => @user.email, :size => "60x10"
+    <br/>
+    = label :user, :password, "Password: "
+    #field
+    = text_field :user, 'password', :size => "60x10"
+    <br/>
+    = label :user, :password_confirmation, "Password Confirmation: "
+    #field
+    = text_field :user, 'password_confirmation', :size => "60x10"
+    <br/>
+    = submit_tag 'Submit', :class => "button"
+  =link_to 'Back', dashboard_index_path, :class => "button"
+%h1{:align=>"center",:style=>"margin-top:100px"} Email Preferences
+
+#form
+  = form_for @user, :url => update_user_email_preference_path(@user),  html: { method: :post } do |f|
+    = f.label "Internal: "
+    = f.check_box :internal
+    <br/>
+    = f.label "External: "
+    = f.check_box :external
+    <br/>
+    = f.label "Executive: "
+    = f.check_box :executive
+    <br/>
+    = f.submit "Confirm", :class => "button"
+>>>>>>> master

@@ -1,0 +1,11 @@
+%h1= "Edit \"#{@category.name}\""
+
+#flashNotice= flash[:notice]
+
+= form_tag update_category_path(@id, @category), :method => :put do
+
+  = label :category, :name, 'Category Name'
+  = text_field :category, 'name', :value => @category.name
+
+  = submit_tag 'Submit'
+=button_to 'back', category_index_path, :method => :get

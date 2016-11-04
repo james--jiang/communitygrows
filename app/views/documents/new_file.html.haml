@@ -20,4 +20,22 @@
                 'Budgets and Finances' => 'budgetfinance', 'AB Meetings' => 'abmeetings', 
                 'Board Resources' => 'boardresources'}, {}, :class => 'form-control'
 
+<<<<<<< HEAD
     = submit_tag 'Submit', :class => 'btn btn-success'
+=======
+= form_tag create_file_path do
+
+  = label :file, :title, 'Title'
+  = text_field :file, 'title'
+  
+  = label :file, :url, 'URL'
+  = text_field :file, 'url'
+
+  = label :file, :category_id, 'Category'
+  - shown_categories = @categories.map { |category| (not category.hidden?) ? [category.name, category.id] : ["tmp", "tmp"] }.to_h
+  - shown_categories.delete("tmp")
+  = select :file, :category_id, shown_categories
+
+  = submit_tag 'Submit'
+=link_to 'back', documents_path
+>>>>>>> master

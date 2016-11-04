@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container
   .well
     %h1 #{@file.title} Information
@@ -41,3 +42,78 @@
         = link_to delete_file_path(@file.id), :class => 'btn btn-danger pull-right', data: { confirm: 'Are you sure?' } do
           %span.glyphicon.glyphicon-remove
           Delete document
+=======
+:javascript
+  var showEdit = function(){
+    $("#edit_doc_form").show();
+    $("#edit_doc_button").hide();
+  };
+
+#docRepo
+  %h1 "#{@file.title}" Information
+  
+
+- if flash[:notice] and flash[:notice]!="Signed in successfully."
+  #flashNotice
+    = flash[:notice]
+    
+
+%h2
+  File:
+  = link_to @file.title, @file.url, :target => "_blank"
+
+%h3
+  Updated At:
+  #{@file.updated_at.strftime("%m/%d/%Y %l:%M %p")}
+
+%h3
+  %label Mark As Read
+  %input{:name => "markasread", :type => "checkbox", :value => "#{@file.id}", :id => "markasread", :checked => (@who_has_read.include?(current_user))}
+  
+  
+%h2
+  %table#mark_as_read_table
+    %thead
+      %tr
+        %td User name
+        %td Status
+    %tbody
+      - if @users.empty?
+        %td= "No users have been entered"
+      - @users.each do |user|
+        %tr
+          %td= user.email
+          - if @who_has_read.include?(user)
+            %td= "Read"
+          - else
+            %td= "Not Read"
+  
+- if current_user.admin
+  %h2 Edit Document
+  =link_to 'Click to Edit Document', "#", :id => "edit_doc_button", :class => "buttonDoc", :onclick => "showEdit()"
+  = form_tag update_file_path(@id, @file), :style => "display: none", :method => :put, :id => "edit_doc_form" do
+  
+    %p
+      = label :file, :title, 'Title'
+      = text_field :file, 'title', :value => @file.title
+    
+    %p
+      = label :file, :url, 'URL'
+      = text_field :file, 'url', :value => @file.url
+    
+    %p
+      = label :file, :category_id, 'Category'
+    
+      - shown_categories = @categories.map { |category| (not category.hidden?) ? [category.name, category.id] : ["tmp", "tmp"] }.to_h
+      - shown_categories.delete("tmp")
+      = select :file, :category_id, shown_categories
+  
+    = submit_tag 'Submit'
+
+
+- if current_user.admin
+  %p= button_to "Delete document", delete_file_path(@file.id), :method => :delete, data: { confirm: 'Are you sure?' }
+
+=button_to 'back', documents_path, :method => :get
+
+>>>>>>> master

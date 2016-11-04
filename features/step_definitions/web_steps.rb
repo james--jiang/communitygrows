@@ -31,6 +31,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
@@ -43,7 +44,6 @@ end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
-  sleep(0.2)
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
@@ -52,13 +52,16 @@ end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
-  sleep(0.2)
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   p link
   click_link(link)
-  sleep(0.2)
+end
+
+When /^(?:|I )fill in hidden field "([^"]*)" with "([^"]*)"$/ do |field, value|
+  page.all(".form_tag[id='edit_doc_form']", :visible => true)
+  fill_in(field, :with => value)
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
@@ -213,7 +216,11 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, pa
   with_scope(parent) do
     field_checked = find_field(label)['checked']
     if field_checked.respond_to? :should
+<<<<<<< HEAD
       expect(field_checked).to be_true
+=======
+      field_checked.should be_truthy
+>>>>>>> master
     else
       assert field_checked
     end

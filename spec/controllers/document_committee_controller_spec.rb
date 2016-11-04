@@ -15,6 +15,7 @@ describe DocumentCommitteeController do
             expect(flash[:notice]).to eq("Populate all fields before submission.") 
         end
         
+        
         it "checks validity of URL" do
             post :create_document, params: {title: "Rspec", url: "rspec", committee_type: :internal}
             expect(flash[:notice]).to eq("Please enter a valid URL.") 
@@ -25,9 +26,15 @@ describe DocumentCommitteeController do
             expect(flash[:notice]).to eq("Document List creation successful and email was successfully sent.")
         end
         
+<<<<<<< HEAD
         it "development env sends email" do
             allow(Rails.env).to receive(:development?).and_return(true)
             post :create_document, params: {title: "Rspec", url: "rspec.com", committee_type: :internal}
+=======
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
+            post :create_document, :title => "Rspec", :url => "rspec.com", :committee_type => :internal
+>>>>>>> master
         end
     end
     
@@ -54,9 +61,15 @@ describe DocumentCommitteeController do
             expect(response).to redirect_to(subcommittee_index_path(committee_type: @doc.committee_type))
         end
         
+<<<<<<< HEAD
         it "development env sends email" do
             allow(Rails.env).to receive(:development?).and_return(true)
             put :update_document, params: {document: {id: @doc.id}, title: @doc.title, url: "new_url.com", committee_type: @doc.committee_type}
+=======
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
+            put :update_document, :document => {:id => @doc.id}, :title => @doc.title, :url => "new_url.com", :committee_type => @doc.committee_type 
+>>>>>>> master
         end
     end
     
@@ -66,4 +79,6 @@ describe DocumentCommitteeController do
             expect(response).to redirect_to(subcommittee_index_path(committee_type: @doc.committee_type))
         end
     end
+
+    
 end

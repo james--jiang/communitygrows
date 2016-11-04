@@ -69,7 +69,9 @@ group :test do
   gem 'simplecov', :require => false #by Tony. Gem for the test coverage
   gem 'codeclimate-test-reporter'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  # gem 'selenium-webdriver'
+  gem 'poltergeist'
+  gem 'phantomjs'
   gem 'headless'
 end
 

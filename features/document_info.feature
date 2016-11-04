@@ -7,10 +7,12 @@ Feature: Document Info Page
  
 Background: user is on the document repository page
   Given a logged in user
+  And a category called "Ctgy"
   And I am on the document repository page 
   When I follow "Add new file"
   Then I fill in "file_title" with "schedule"
   Then I fill in "file_url" with "mock.com/schedule"
+  And I select "Ctgy" from "file_category_id"
   And I press "Submit"
   Then I should be on the document repository page
   And I should see "schedule"
@@ -24,26 +26,53 @@ Scenario: User should see Updated Time of Document
   Then I should see "Updated At"
   
 # happy path
-Scenario: User can edit an existing file
+@javascript
+Scenario: Admin can edit an existing file
+  Given I am logged out
+  Given a logged in admin
+  And I am on the document repository page
+  When I follow "schedule"
+  When I follow "Click to Edit Document"
   When I fill in "file_title" with "new schedule"
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Save changes"
   Then I should be on the document repository page
   And I should see "new schedule"
 
+Scenario: User cannot edit document
+  Then I should not see "Click to Edit Document"
+
 # sad path
-Scenario: User cannot edit an existing file without proper file name
+@javascript
+Scenario: Admin cannot edit an existing file without proper file name
+  Given I am logged out
+  Given a logged in admin
+  And I am on the document repository page
+  When I follow "schedule"
+  When I follow "Click to Edit Document"
   When I fill in "file_title" with ""
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Save changes"
   And I should see "Populate all fields before submission."
-
+  
 # happy path
 @javascript
+<<<<<<< HEAD
 Scenario: User can delete a document
   When I follow "Delete document"
+=======
+Scenario: User can delete an announcement
+  Given I am logged out
+  Given a logged in admin
+  And I am on the document repository page
+  When I follow "schedule"
+  When I press "Delete document"
+>>>>>>> master
   And I confirm popup
-  # Then I should be on the document repository page
+  Then I should be on the document repository page
   Then I should see "deleted successfully"
+  
+Scenario: User cannot edit document
+  Then I should not see "Delete document"
   
   

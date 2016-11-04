@@ -13,3 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
+
+$('#markasread').click(function(){
+    $.post("mark_as_read", {
+        id: $(this).value,
+    }, function(data, status) {});
+});

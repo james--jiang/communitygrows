@@ -1,0 +1,46 @@
+#docRepo
+  %h1 Category Management
+  
+
+- if flash[:notice] and flash[:notice]!="Signed in successfully."
+  #flashNotice
+    = flash[:notice]
+
+- @categories.each do |category|
+  %table
+    %thead
+      %tr
+        %td Category Name
+        %td Hide/Show Category
+        %td Delete Category
+    %tbody
+      %td#category_name= link_to "#{category.name}", edit_category_path(category.id)
+      - if category.hidden?
+        %td=button_to "Show #{category.name}", show_category_path(category.id), :method => :get
+      - else
+        - if category.documents.length != 0
+          %td=button_to "Hide #{category.name}", hide_category_path(category.id), :method => :get, data: { confirm: "There are documents in this category, are you sure you want to hide it?"}
+        -else 
+          %td=button_to "Hide #{category.name}", hide_category_path(category.id), :method => :get
+          - puts category.hidden?
+      %td= button_to "Delete #{category.name}", delete_category_path(category.id), :method => :delete, data: { confirm: 'Are you sure?' }
+      %tr
+        / %td= "Files"
+        %td{colspan: 3}
+          #document_content
+            %table#subtable{}
+              %thead#subthead
+                %tr
+                  %td File name
+                  %td Updated at
+              %tbody
+                - documents = category.documents
+                - if documents.empty?
+                  %td= "No files have been entered"
+                - documents.each do |file|
+                  %tr
+                    %td= link_to file.title, info_file_path(file.id)
+                    %td= file.updated_at.strftime("%m/%d/%Y %l:%M %p")
+        %hr
+        
+= link_to 'New Category', new_category_path, :class => "button"

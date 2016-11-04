@@ -27,15 +27,15 @@ describe UserController do
     describe 'updateEmailPreferences' do
         it 'Should update email preferences' do
             user_params = {:email => "tester@rspec.com", :password => "communitygrowsrocks", :password_confirmation => "communitygrowsrocks",:internal=>"true"}
-            post :updateEmailPreferences, user_id: users(:tester).id, :user => user_params
-            response.should redirect_to(update_user_credentials_path(users(:tester).id))   
+            post :updateEmailPreferences, params: {user_id: users(:tester).id, :user => user_params}
+            expect(response).to redirect_to(update_user_credentials_path(users(:tester).id))   
             expect(flash[:notice]).to match(/Your email preference settings have been updated./)      
 
         end
         it 'Should not update email preferences' do
-            user_params = {:email => "tester@rspec.com", :password => "communitygrowsrocks", :password_confirmation => "communitygrowsrocks",:internal=>"false",:external=>"false",:executive=>"false"}
-            post :updateEmailPreferences, user_id: users(:tester).id, :user => user_params
-            response.should redirect_to(update_user_credentials_path(users(:tester).id))
+            user_params = {email: "tester@rspec.com", password: "communitygrowsrocks", password_confirmation: "communitygrowsrocks", internal: "false", external: "false", executive: "false"}
+            post :updateEmailPreferences, params: {user_id: users(:tester).id, user: user_params}
+            expect(response).to redirect_to(update_user_credentials_path(users(:tester).id))
             expect(flash[:notice]).to match(/Please select at least your committee to receive emails from./)      
         end
     end

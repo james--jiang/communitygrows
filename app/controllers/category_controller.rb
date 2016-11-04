@@ -9,14 +9,14 @@ class CategoryController < ActionController::Base
     def new_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path
         end
     end
     
     def create_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         category = params[:category]
         if category[:name].to_s == ""
@@ -40,7 +40,7 @@ class CategoryController < ActionController::Base
     def edit_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         @id = params[:id] 
         @category = Category.find(@id)
@@ -50,7 +50,7 @@ class CategoryController < ActionController::Base
     def update_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         @category = Category.find(params[:id])
         category = params[:category]
@@ -76,7 +76,7 @@ class CategoryController < ActionController::Base
     def delete_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         @category = Category.find(params[:id])
         @category.destroy!
@@ -87,7 +87,7 @@ class CategoryController < ActionController::Base
     def hide_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         category = Category.find(params[:id])
         category.hide
@@ -98,7 +98,7 @@ class CategoryController < ActionController::Base
     def show_category
         if !current_user.admin
             flash[:message] = "Only admins can create categories."
-            redirect_to root
+            redirect_to root_path and return
         end
         category = Category.find(params[:id])
         category.show

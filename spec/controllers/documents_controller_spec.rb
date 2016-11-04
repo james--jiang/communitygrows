@@ -5,8 +5,8 @@ describe DocumentsController do
     fixtures :users
     before(:each) do
         sign_in users(:tester)
-        Category.create!({:id => 1, :name => "Good Category"})
-        post :create_file, :file => {:title => "RepoTest", :url => "https://www.google.com/", :committee_type => 'boardoverview', :category_id => 1}
+        Category.create!({id: 1, name: "Good Category"})
+        post :create_file, params: {file: {title: "RepoTest", url: "https://www.google.com/", :committee_type => 'boardoverview', :category_id => 1}}
         @doc = Document.find_by_title("RepoTest")
     end
     
@@ -17,7 +17,7 @@ describe DocumentsController do
         end
         
         it "can create a new document" do
-            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview', :category_id => 1}
+            post :create_file, params: {file: {title: "something", url: "something.com", :committee_type => 'boardoverview', :category_id => 1}}
             expect(Document.find_by_title("something").title).to eql("something")
         end
         
@@ -25,13 +25,13 @@ describe DocumentsController do
             post :create_file, params: {file: {title: "something", committee_type: :internal}}
             expect(flash[:notice]).to eq("Populate all fields before submission.")
         
-            post :create_file, :file => {:title => "something", :url => "something", :committee_type => 'boardoverview', :category_id => 1}
-            flash[:notice].should eq("Please enter a valid URL.")
+            post :create_file, params: {file: {title: "something", url: "something", :committee_type => 'boardoverview', :category_id => 1}}
+            expect(flash[:notice]).to eq("Please enter a valid URL.")
         end
         
         it "production env sends email" do
-            Rails.env.stub(:production? => true)
-            post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview', :category_id => 1}
+            allow(Rails.env).to receive(:production?).and_return true
+            post :create_file, params: {file: {title: "something", url: "something.com", :committee_type => 'boardoverview', :category_id => 1}}
         end
     end
     
@@ -44,29 +44,29 @@ describe DocumentsController do
     
     describe "edit/update document (file) in the doc info page" do
         before(:each) do
-            get :info_file, format: @doc.id
+            get :info_file, params: {format: @doc.id}
         end
         
         it "edits a document" do
-            put :edit_file, {:format => @doc.id}
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
-            page.should redirect_to(:documents)
+            put :edit_file, params: {format: @doc.id}
+            put :update_file, params: {format: @doc.id, file: {title: "ccc", url: "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
+            expect(page).to redirect_to(:documents)
             expect(Document.find(@doc.id).title).to eql("ccc")
         end
         
         it "checks for populated fields" do
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :committee_type => 'boardoverview', :category_id => 1}}
-            flash[:notice].should eq("Populate all fields before submission.") 
+            put :update_file, params: {format: @doc.id, file: {title: "ccc", :committee_type => 'boardoverview', :category_id => 1}}
+            expect(flash[:notice]).to eq("Populate all fields before submission.") 
         end
         
         it "checks validity of URL" do
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd", :committee_type => 'boardoverview', :category_id => 1}}
-            flash[:notice].should eq("Please enter a valid URL.") 
+            put :update_file, params: {format: @doc.id, file: {title: "ccc", url: "ddddd", :committee_type => 'boardoverview', :category_id => 1}}
+            expect(flash[:notice]).to eq("Please enter a valid URL.") 
         end
         
         it "production env sends email" do
-            Rails.env.stub(:production? => true)
-            put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
+            allow(Rails.env).to receive(:production?).and_return true
+            put :update_file, params: {format: @doc.id, file: {title: "ccc", url: "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
         end
     end
     
@@ -85,7 +85,7 @@ describe DocumentsController do
     
     describe "Document info page" do
         before(:each) do
-            get :info_file, format: @doc.id
+            get :info_file, params: {format: @doc.id}
         end
         
         it 'should render the doc info page' do
@@ -95,27 +95,27 @@ describe DocumentsController do
     
     describe "Mark as Read" do
         before(:each) do
-            get :info_file, :format => @doc.id
+            get :info_file, params: {format: @doc.id}
         end
         
         it 'redirect to the info_file page after marked as read changed' do
             @request.env['HTTP_REFERER'] = info_file_path
-            post :mark_as_read, :id => @doc.id
+            post :mark_as_read, params: {id: @doc.id}
             expect(response).to redirect_to(info_file_path)
         end
         
         it 'displays marked as read flash message if initially not read' do
             @request.env['HTTP_REFERER'] = info_file_path
-            post :mark_as_read, :id => @doc.id
-            flash[:notice].should eq("Document [#{@doc.title}] marked as read.")
+            post :mark_as_read, params: {id: @doc.id}
+            expect(flash[:notice]).to eq("Document [#{@doc.title}] marked as read.")
         end
         
         it 'displays marked as not read flash message if initially read' do
             @request.env['HTTP_REFERER'] = info_file_path
-            post :mark_as_read, :id => @doc.id
+            post :mark_as_read, params: {id: @doc.id}
             # Same controller method twice to mark as not read.
-            post :mark_as_read, :id => @doc.id
-            flash[:notice].should eq("Document [#{@doc.title}] marked as not read.")
+            post :mark_as_read, params: {id: @doc.id}
+            expect(flash[:notice]).to eq("Document [#{@doc.title}] marked as not read.")
         end
     end
 end   

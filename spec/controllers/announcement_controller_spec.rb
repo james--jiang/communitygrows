@@ -29,7 +29,7 @@ describe AnnouncementController do
     end
     describe 'create announcement' do
         it 'doesn\'t accept an empty title' do
-            post :create_announcement, :committee_type => :internal, :title => ''
+            post :create_announcement, params: {committee_type: :internal, title: ''}
             expect(flash[:notice]).to eq("Title field cannot be left blank.")
             expect(response).to redirect_to(new_committee_announcement_path(:internal))
         end
@@ -40,19 +40,19 @@ describe AnnouncementController do
             # end
             it 'internal' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
-                post :create_announcement, :committee_type => :internal, :title => "a"
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
+                post :create_announcement, params: {committee_type: :internal, title: "a"}
             end
             it 'external' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
 
-                post :create_announcement, :committee_type => :external, :title => "a"
+                post :create_announcement, params: {committee_type: :external, title: "a"}
             end
             it 'executive' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
-                post :create_announcement, :committee_type => :executive, :title => "a"
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
+                post :create_announcement, params: {committee_type: :executive, title: "a"}
             end
         end
     end
@@ -80,24 +80,24 @@ describe AnnouncementController do
     describe 'update announcement' do
         describe 'emails' do
             before(:each) do
-                Rails.env.stub(:production? => true)
+                allow(Rails.env).to receive(:production?).and_return(true)
             end
             it 'internal' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
-                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
+                put :update_announcement, params: {title: "a", content: @a.content, announcement_id: @a.id, committee_type: @a.committee_type, announcement: { id: @a.id }}
             end
             it 'external' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
                 @a.committee_type = :external
-                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                put :update_announcement, params: {title: "a", content: @a.content, announcement_id: @a.id, committee_type: @a.committee_type, announcement: { id: @a.id }}
             end
             it 'executive' do
                 expect(Rails.env).to receive(:production?).and_return(true)
-                NotificationMailer.stub_chain(:new_document_email, :deliver).and_return(true)
+                allow(NotificationMailer).to receive_message_chain(:new_document_email, :deliver).and_return(true)
                 @a.committee_type = :executive
-                put :update_announcement, :title => "a", :content => @a.content, :announcement_id => @a.id, :committee_type => @a.committee_type, :announcement => { :id => @a.id }
+                put :update_announcement, params: {title: "a", content: @a.content, announcement_id: @a.id, committee_type: @a.committee_type, announcement: { id: @a.id }}
             end
         end
     end

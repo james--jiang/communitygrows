@@ -59,7 +59,7 @@ describe DocumentsController do
         
         it "checks validity of URL" do
             put :update_file, params: {format: @doc.id, file: {title: "ccc", url: "ddddd", committee_type: 'boardoverview'}}
-            expect(flash[:notice]).to eq("Please enter a valid URL.") 
+            expect(flash[:notice]).to eq("Please enter a valid URL.")
         end
         
         it "development env sends email" do

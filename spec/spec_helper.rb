@@ -18,8 +18,8 @@ require 'capybara/rspec' #by Tony
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'simplecov'
-SimpleCov.start 'rails'
+# require 'simplecov'
+# SimpleCov.start 'rails'
 
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start

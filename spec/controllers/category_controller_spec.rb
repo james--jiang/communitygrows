@@ -43,11 +43,6 @@ describe CategoryController do
             flash[:notice].should eq("The category Good Category was successfully created!")
         end
 
-		it "development env sends email" do
-            Rails.env.stub(:development? => true)
-            post :create_category, :category => {:name => "Good Category"}
-        end
-
         it 'redirects non-admin users' do
             sign_in users(:user)
             post :create_category, :category => {:name => "Good Category"}
@@ -90,11 +85,6 @@ describe CategoryController do
 		it 'updates the category' do
             put :update_category, {:id => 25, :category => {:name => "Good Category"}}
             expect(response).to redirect_to(category_index_path)
-        end
-
-        it "development env sends email" do
-            Rails.env.stub(:development? => true)
-            put :update_category, {:id => 25, :category => {:name => "Good Category"}}
         end
 
         it 'redirects non-admin users' do

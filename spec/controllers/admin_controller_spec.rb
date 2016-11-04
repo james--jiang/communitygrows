@@ -15,7 +15,7 @@ describe AdminController do
         it 'redirects to index page on success' do
             sign_in users(:tester)
             user_params = {:email => "admin@rspec.com", :password => "communitygrowsrocks", :password_confirmation => "communitygrowsrocks", :admin => true}
-            post :create_user, :user => user_params
+            post :create_user, params: {user: user_params}
             expect(response).to redirect_to(:admin_index)
         end
         
@@ -23,7 +23,7 @@ describe AdminController do
     describe 'delete_user' do
         it 'deletes a user' do
             sign_in users(:tester)
-            delete :delete_user, id: users(:user).id
+            delete :delete_user, params: {id: users(:user).id}
             expect(response).to redirect_to(:admin_index)
         end
     end
@@ -45,18 +45,18 @@ describe AdminController do
     describe 'edit_user' do
         it 'renders edit user page' do
             sign_in users(:tester)
-            get :edit_user, id: users(:tester).id
+            get :edit_user, params: {id: users(:tester).id}
             expect(response).to render_template(:edit_user)
         end
         it 'should redirect to edit user page' do
             sign_in users(:tester)
-            put :update_user, id: users(:tester).id
+            put :update_user, params: {id: users(:tester).id}
             expect(response).to redirect_to(:edit_user)
         end
         it 'redirects to index page on success' do
             sign_in users(:tester)
-            user_params = {:email => "admin@rspec.com", :password => "communitygrowsrocks", :password_confirmation => "communitygrowsrocks", :admin => true}
-            put :update_user, id: users(:tester).id, :user => user_params
+            user_params = {email: "admin@rspec.com", password: "communitygrowsrocks", password_confirmation: "communitygrowsrocks", admin: true}
+            put :update_user, params: {id: users(:tester).id, user: user_params}
             expect(response).to redirect_to(:admin_index)
         end
     end

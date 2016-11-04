@@ -14,6 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap.min
 
+$('#edit_doc_button').click(function(){
+    $("#edit_doc_form").show();
+    $("#edit_doc_button").hide();
+});
+
 $('#markasread').click(function(){
     $.post("mark_as_read", {
         id: $(this).value,

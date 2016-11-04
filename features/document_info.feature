@@ -57,17 +57,12 @@ Scenario: Admin cannot edit an existing file without proper file name
   
 # happy path
 @javascript
-<<<<<<< HEAD
 Scenario: User can delete a document
-  When I follow "Delete document"
-=======
-Scenario: User can delete an announcement
   Given I am logged out
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
   When I press "Delete document"
->>>>>>> master
   And I confirm popup
   Then I should be on the document repository page
   Then I should see "deleted successfully"

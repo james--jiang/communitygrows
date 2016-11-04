@@ -3,23 +3,23 @@
 .container.well
   %h3.center-text
     %strong #{@announcement.title}
-  %h3.center-text #{@announcement.content}
+  %h4.center-text #{@announcement.content}
+  %hr
 
   
   / %h4 Join the discussion!
   -@emailhash.each do |comment, email|
-    .well
-      .row
-        .col-md-3
-          #{comment.created_at.strftime("%m/%d/%Y %l:%M %p")}
-          %br
-          %b #{email}:
-        .col-md-7
-          #{comment.content}
-        .col-md-2
-          = link_to delete_comment_path(@announcement.id, comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs pull-right' do
-            %span.glyphicon.glyphicon-remove
-            Delete Comment
+    .well.row
+      .col-md-3
+        #{comment.created_at.strftime("%m/%d/%Y %l:%M %p")}
+        %br
+        %b #{email}:
+      .col-md-7
+        #{comment.content}
+      .col-md-2
+        = link_to delete_comment_path(@announcement.id, comment.id), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs pull-right' do
+          %span.glyphicon.glyphicon-remove
+          Delete Comment
   
   %br
   %br

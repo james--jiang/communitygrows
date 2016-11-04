@@ -1,6 +1,8 @@
 class DocumentsController < ActionController::Base
     layout "base"
     before_action :authenticate_user!
+
+    @url_matcher = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b[-a-zA-Z0-9@:%_\+.~#\?\&\/]/
     
     def file_params
       params.require(:file).permit(:title, :url, :committee_type, :category)
@@ -27,7 +29,7 @@ class DocumentsController < ActionController::Base
             if file[:title].to_s == "" or file[:url].to_s == ""
                 flash[:notice] = "Populate all fields before submission."
                 redirect_to new_file_path
-            elsif !(file[:url]=~/.com(.*)/)
+            elsif !(file[:url] =~ @url_matcher)
                 flash[:notice] = "Please enter a valid URL."
                 redirect_to new_file_path
             else 
@@ -58,9 +60,9 @@ class DocumentsController < ActionController::Base
         if file[:title].to_s == "" or file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
             redirect_to info_file_path(params[:format])
-        elsif !(file[:url]=~/.com(.*)/)
+        elsif !(file[:url] =~ @url_matcher)
             flash[:notice] = "Please enter a valid URL."
-            redirect_to new_file_path
+            redirect_to info_file_path(params[:format])
         else
             if !(file[:url]=~/http(s)?:/)
                 file[:url]="http://"+file[:url]

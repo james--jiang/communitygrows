@@ -7,6 +7,10 @@ class UserController < ActionController::Base
     end
     
     def index
+        if current_user.id.to_s != params[:user_id]
+            flash[:notice] = "Tried to view another user's credentials."
+            redirect_to user_credentials_path(current_user.id.to_s) and return
+        end
         @user = User.find params[:user_id]
         if flash[:notice] == "Signed in successfully."
             flash[:notice] = nil
@@ -14,7 +18,10 @@ class UserController < ActionController::Base
     end
     
     def update
-
+        if current_user.id.to_s != params[:user_id]
+            flash[:notice] = "Tried to change another user's credentials."
+            redirect_to user_credentials_path(current_user.id.to_s) and return
+        end
         @user = User.find(params[:user_id])
         if @user.update_attributes(user_params)
             bypass_sign_in(@user)
@@ -27,8 +34,12 @@ class UserController < ActionController::Base
     end
 
     def updateEmailPreferences
+        if current_user.id.to_s != params[:user_id]
+            flash[:notice] = "Tried to update another user's preferences."
+            redirect_to user_credentials_path(current_user.id.to_s) and return
+        end
         @user = User.find(params[:user_id])
-        
+    
         if @user.update_attributes(user_params)
             if (@user.internal != true) && (@user.external != true) && (@user.executive != true)
                 flash[:notice] = "Please select at least your committee to receive emails from."
@@ -38,7 +49,6 @@ class UserController < ActionController::Base
         else
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         end
-        redirect_to user_credentials_path(@user.id)    
-     end
-
+        redirect_to user_credentials_path(@user.id)
+    end
 end

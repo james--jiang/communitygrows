@@ -28939,13 +28939,6 @@ var o,i,s,a,u;return i=null!=n?n:{},a=i.restorationIdentifier,s=i.restorationDat
 
 
 }).call(this);
-var markAsRead = function(){
-    $.post("mark_as_read", {
-        id: document.getElementById("markasread").value,
-    },
-    function(data, status){
-    });
-};
 (function() {
 
 
@@ -28994,13 +28987,13 @@ var markAsRead = function(){
 
 
 
-var markAsRead = function(){
-    $.post("mark_as_read", {
-        id: document.getElementById("markasread").value,
-    },
-    function(data, status){
-    });
-};
+// var markAsRead = function(){
+//     $.post("mark_as_read", {
+//         id: document.getElementById("markasread").value,
+//     },
+//     function(data, status){
+//     });
+// };
 
 // var showEdit = function(){
 //     $("#edit_doc_form").show();

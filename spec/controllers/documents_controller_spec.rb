@@ -97,25 +97,28 @@ describe DocumentsController do
         before(:each) do
             get :info_file, params: {format: @doc.id}
         end
+
+        # No longer redirects, as it is now a pure Ajax request. -Nathan       
+        # it 'redirect to the info_file page after marked as read changed' do
+        #     @request.env['HTTP_REFERER'] = info_file_path
+        #     post :mark_as_read, params: {id: @doc.id}
+        #     expect(response).to redirect_to(info_file_path)
+        # end
         
-        it 'redirect to the info_file page after marked as read changed' do
+        it 'returns json for marked as read if previously not read' do
             @request.env['HTTP_REFERER'] = info_file_path
             post :mark_as_read, params: {id: @doc.id}
-            expect(response).to redirect_to(info_file_path)
+            parsed_body = JSON.parse(response.body)
+            expect(parsed_body['result']).to eq('Read')
         end
         
-        it 'displays marked as read flash message if initially not read' do
-            @request.env['HTTP_REFERER'] = info_file_path
-            post :mark_as_read, params: {id: @doc.id}
-            expect(flash[:notice]).to eq("Document [#{@doc.title}] marked as read.")
-        end
-        
-        it 'displays marked as not read flash message if initially read' do
+        it 'returns json for marked as not read if previously read' do
             @request.env['HTTP_REFERER'] = info_file_path
             post :mark_as_read, params: {id: @doc.id}
             # Same controller method twice to mark as not read.
             post :mark_as_read, params: {id: @doc.id}
-            expect(flash[:notice]).to eq("Document [#{@doc.title}] marked as not read.")
+            parsed_body = JSON.parse(response.body)
+            expect(parsed_body['result']).to eq('Not Read')
         end
     end
 end   

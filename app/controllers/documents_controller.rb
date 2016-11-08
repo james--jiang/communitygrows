@@ -92,7 +92,7 @@ class DocumentsController < ActionController::Base
         @file = Document.find params[:id]
         if current_user.documents.exists?(@file.id)
             current_user.documents.delete(@file.id)
-            render json: { document: "[#{@file.title}]", result: "Not Read.", user: current_user.id}
+            render json: { document: "[#{@file.title}]", result: "Not Read", user: current_user.id}
         else
             current_user.documents<<(@file)
             render json: { document: "[#{@file.title}]", result: "Read", user: current_user.id}

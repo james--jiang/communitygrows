@@ -10,9 +10,9 @@ Background: user is on the document repository page
   And a category called "Ctgy"
   And I am on the document repository page 
   When I follow "Add new file"
-  Then I fill in "file_title" with "schedule"
-  Then I fill in "file_url" with "mock.com/schedule"
-  And I select "Ctgy" from "file_category_id"
+  Then I fill in "Title" with "schedule"
+  Then I fill in "URL" with "mock.com/schedule"
+  And I select "Ctgy" from "Category"
   And I press "Submit"
   Then I should be on the document repository page
   And I should see "schedule"
@@ -33,8 +33,8 @@ Scenario: Admin can edit an existing file
   And I am on the document repository page
   When I follow "schedule"
   When I press "Click to Edit Document"
-  When I fill in "file_title" with "new schedule"
-  When I fill in "file_url" with "mock.com/schedule"
+  When I fill in "Title" with "new schedule"
+  When I fill in "URL" with "mock.com/schedule"
   And I press "Save changes"
   Then I should be on the document repository page
   And I should see "new schedule"
@@ -50,8 +50,8 @@ Scenario: Admin cannot edit an existing file without proper file name
   And I am on the document repository page
   When I follow "schedule"
   When I press "Click to Edit Document"
-  When I fill in "file_title" with ""
-  When I fill in "file_url" with "mock.com/schedule"
+  When I fill in "Title" with ""
+  When I fill in "URL" with "mock.com/schedule"
   And I press "Save changes"
   And I should see "Populate all fields before submission."
   
@@ -62,6 +62,7 @@ Scenario: User can delete a document
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
+  And I press "Click to Edit Document"
   When I press "Delete document"
   And I confirm popup
   Then I should be on the document repository page

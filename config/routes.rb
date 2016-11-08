@@ -65,10 +65,11 @@ Rails.application.routes.draw do
   
   get 'documents/new_file' => 'documents#new_file', as: :new_file
   post 'documents/create' => 'documents#create_file', as: :create_file
-  get 'documents/delete_file' => 'documents#delete_file', as: :delete_file
+  delete 'documents/delete_file' => 'documents#delete_file', as: :delete_file
   get 'documents/edit_file' => 'documents#edit_file', as: :edit_file
   put 'documents/edit_file' => 'documents#update_file', as: :update_file
   get 'documents/doc_info' => 'documents#info_file', as: :info_file
+  post 'documents/mark_as_read' => 'documents#mark_as_read', as: :mark_as_read
 
 
   # Category Management

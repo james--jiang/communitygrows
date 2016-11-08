@@ -63,6 +63,11 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.datetime "end"
   end
 
+  create_table "read_sessions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "document_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",                    null: false
     t.string   "encrypted_password",     default: "",                    null: false
@@ -76,7 +81,11 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.boolean  "admin"
+<<<<<<< HEAD
     t.datetime "last_sign_in_at",        default: '2016-10-14 15:04:50', null: false
+=======
+    t.datetime "last_sign_in_at",        default: '2016-10-28 17:42:11', null: false
+>>>>>>> 56e5581005e4fd7d5d82f04e1a399dd67007ce85
     t.boolean  "internal"
     t.boolean  "external"
     t.boolean  "executive"

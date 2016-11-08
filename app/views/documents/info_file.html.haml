@@ -32,11 +32,9 @@
         %tr
           %td= user.email
           - if @who_has_read.include?(user)
-            %td
-              %span{id: "#{user.id}_read"} Read
+            %td{id: "#{user.id}_read"} Read
           - else
-            %td
-              %span{id: "#{user.id}_read"} Not Read
+            %td{id: "#{user.id}_read"} Not Read
     
   - if current_user.admin
     %h3 Edit Document
@@ -58,7 +56,7 @@
           - shown_categories.delete "tmp"
           = select :file, :category_id, shown_categories, {}, class: 'form-control'
         
-        = submit_tag 'Submit', class: 'btn btn-success'
+        = submit_tag 'Save changes', class: 'btn btn-success'
 
       = button_to delete_file_path(@file.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger pull-right' do
         %span.glyphicon.glyphicon-remove

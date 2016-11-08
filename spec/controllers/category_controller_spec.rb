@@ -87,14 +87,6 @@ describe CategoryController do
             expect(response).to redirect_to(category_index_path)
         end
 
-<<<<<<< HEAD
-        it "development env sends email" do
-            allow(Rails.env).to receive(:development?).and_return true
-            put :update_category, params: {id: 25, category: {name: "Good Category"}}
-        end
-
-=======
->>>>>>> 67e8629699a565c7803817d92b2f92972031bf80
         it 'redirects non-admin users' do
             sign_in users(:user)
             put :update_category, params: {id: 25, category: {name: "Good Category"}}

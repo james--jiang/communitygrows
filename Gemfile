@@ -66,7 +66,7 @@ group :test do
   gem 'database_cleaner'
   gem 'autotest-rails'
   gem 'factory_girl_rails'
-  gem 'simplecov', :require => false #by Tony. Gem for the test coverage
+  gem 'simplecov'
   gem 'codeclimate-test-reporter'
   gem 'capybara'
   # gem 'selenium-webdriver'
@@ -79,6 +79,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'rspec'
-  # gem 'kramdown'
 end
 

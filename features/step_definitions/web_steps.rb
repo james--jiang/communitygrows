@@ -172,7 +172,7 @@ end
 Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
-    expect(field_checked).to be_true
+    expect(field_checked).to be true
   end
 end
 

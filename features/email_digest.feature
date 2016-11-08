@@ -26,7 +26,7 @@ Scenario: Happy Path
   And I press "Confirm"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
-  Then the "user_internal" checkbox should be checked
+  Then the "Internal:" checkbox should be checked
   
   Given I am on the account details page for "james@gmail.com"
   When I check "user_internal" 
@@ -35,14 +35,14 @@ Scenario: Happy Path
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
   Then the "user_internal" checkbox should be checked
-  And the "user_executive" checkbox should be checked
+  And the "Executive:" checkbox should be checked
 
   Given I am on the account details page for "james@gmail.com"
   When I check "user_external"
   And I press "Confirm"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
-  Then the "user_external" checkbox should be checked
+  Then the "External:" checkbox should be checked
 
   Given I am on the account details page for "james@gmail.com"
   When I check "user_internal"
@@ -51,9 +51,9 @@ Scenario: Happy Path
   And I press "Confirm"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
-  Then the "user_internal" checkbox should be checked
-  And the "user_executive" checkbox should be checked
-  And the "user_external" checkbox should be checked
+  Then the "Internal:" checkbox should be checked
+  And the "Executive:" checkbox should be checked
+  And the "External:" checkbox should be checked
 
 
   Given I am on the account details page for "james@gmail.com"
@@ -61,8 +61,8 @@ Scenario: Happy Path
   And I check "user_executive"
   And I press "Confirm"
   Then I should see "Your email preference settings have been updated."
-  And the "user_executive" checkbox should be checked
-  And the "user_external" checkbox should be checked
+  And the "Executive:" checkbox should be checked
+  And the "External:" checkbox should be checked
   
 Scenario: Sad Path
   Given I am on the account details page for "james@gmail.com"

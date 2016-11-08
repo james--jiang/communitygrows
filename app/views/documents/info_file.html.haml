@@ -4,6 +4,16 @@
     $("#edit_doc_button").hide();
   };
 
+:javascript
+  var markAsRead = function(){
+    $.post(
+      '/documents/mark_as_read', {
+        id: document.getElementById("markasread").getAttribute('value'),
+      },
+      function(data, status){
+    });
+  };
+
 #docRepo
   %h1 "#{@file.title}" Information
   

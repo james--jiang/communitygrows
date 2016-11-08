@@ -15,6 +15,7 @@ describe DocumentCommitteeController do
             flash[:notice].should eq("Populate all fields before submission.") 
         end
         
+        
         it "checks validity of URL" do
             post :create_document, :title => "Rspec", :url => "rspec", :committee_type => :internal
             flash[:notice].should eq("Please enter a valid URL.") 
@@ -25,8 +26,8 @@ describe DocumentCommitteeController do
             flash[:notice].should eq("Document List creation successful and email was successfully sent.")
         end
         
-        it "development env sends email" do
-            Rails.env.stub(:development? => true)
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
             post :create_document, :title => "Rspec", :url => "rspec.com", :committee_type => :internal
         end
     end

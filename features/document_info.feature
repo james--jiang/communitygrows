@@ -32,7 +32,7 @@ Scenario: Admin can edit an existing file
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
-  When I follow "Click to Edit Document"
+  When I press "Click to Edit Document"
   When I fill in "file_title" with "new schedule"
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Save changes"
@@ -49,7 +49,7 @@ Scenario: Admin cannot edit an existing file without proper file name
   Given a logged in admin
   And I am on the document repository page
   When I follow "schedule"
-  When I follow "Click to Edit Document"
+  When I press "Click to Edit Document"
   When I fill in "file_title" with ""
   When I fill in "file_url" with "mock.com/schedule"
   And I press "Save changes"

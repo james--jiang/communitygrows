@@ -1,7 +1,7 @@
 %h1 "#{@file.title}" Information
   
-- if flash[:notice] and flash[:notice]!="Signed in successfully."
-  #flashNotice
+%p#flashNotice
+  - if flash[:notice] and flash[:notice]!="Signed in successfully."
     = flash[:notice]
     
 .container.well
@@ -16,7 +16,7 @@
       #{@file.updated_at.strftime("%m/%d/%Y %l:%M %p")}
   %h3
     %label Mark As Read
-    = check_box_tag 'markasread', '#{@file.id}', @who_has_read.include?(current_user)
+    = check_box_tag 'markasread', "#{@file.id}", @who_has_read.include?(current_user)
 
   %table.table.table-striped.table-bordered
     %thead.bg-info
@@ -25,14 +25,18 @@
         %th Status
     %tbody
       - if @users.empty?
-        %td No users have been entered
+        %tr
+          %td No users have been entered
+          %td -
       - @users.each do |user|
         %tr
           %td= user.email
           - if @who_has_read.include?(user)
-            %td Read
+            %td
+              %span{id: "#{user.id}_read"} Read
           - else
-            %td Not Read
+            %td
+              %span{id: "#{user.id}_read"} Not Read
     
   - if current_user.admin
     %h3 Edit Document

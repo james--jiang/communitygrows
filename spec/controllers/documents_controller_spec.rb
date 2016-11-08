@@ -29,8 +29,8 @@ describe DocumentsController do
             flash[:notice].should eq("Please enter a valid URL.")
         end
         
-        it "development env sends email" do
-            Rails.env.stub(:development? => true)
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
             post :create_file, :file => {:title => "something", :url => "something.com", :committee_type => 'boardoverview', :category_id => 1}
         end
     end
@@ -48,6 +48,7 @@ describe DocumentsController do
         end
         
         it "edits a document" do
+            put :edit_file, {:format => @doc.id}
             put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
             page.should redirect_to(:documents)
             expect(Document.find(@doc.id).title).to eql("ccc")
@@ -63,8 +64,8 @@ describe DocumentsController do
             flash[:notice].should eq("Please enter a valid URL.") 
         end
         
-        it "development env sends email" do
-            Rails.env.stub(:development? => true)
+        it "production env sends email" do
+            Rails.env.stub(:production? => true)
             put :update_file, {:format => @doc.id, :file => {:title => "ccc", :url => "ddddd.com", :committee_type => 'boardoverview', :category_id => 1}}
         end
     end

@@ -55,8 +55,19 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
-  p link
-  click_link(link)
+  if @javascript
+    page.find(:link, link, visible: true).trigger :click
+  else
+    click_link link
+  end
+end
+
+When /^(?:|I )follow first "([^\"]*)"$/ do |link|
+  if @javascript
+    page.find(:link, link, match: :first, visible: true).trigger :click
+  else
+    click_link link, match: :first
+  end
 end
 
 When /^(?:|I )fill in hidden field "([^"]*)" with "([^"]*)"$/ do |field, value|

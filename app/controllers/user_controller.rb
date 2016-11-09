@@ -26,10 +26,10 @@ class UserController < ActionController::Base
         if @user.update_attributes(user_params)
             bypass_sign_in(@user)
             flash[:notice] = "#{@user.email}'s credentials were successfully updated."
-            redirect_to user_credentials_path(@user.id)
+            redirect_to user_credentials_path
         else
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
-            redirect_to user_credentials_path(@user.id)    
+            redirect_to user_credentials_path    
         end
     end
 
@@ -39,7 +39,6 @@ class UserController < ActionController::Base
             redirect_to user_credentials_path(current_user.id.to_s) and return
         end
         @user = User.find(params[:user_id])
-    
         if @user.update_attributes(user_params)
             if (@user.internal != true) && (@user.external != true) && (@user.executive != true)
                 flash[:notice] = "Please select at least your committee to receive emails from."
@@ -49,6 +48,6 @@ class UserController < ActionController::Base
         else
             flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         end
-        redirect_to user_credentials_path(@user.id)
-    end
+        redirect_to user_credentials_path    
+     end
 end

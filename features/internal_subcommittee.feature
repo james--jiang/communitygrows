@@ -104,6 +104,7 @@ Scenario: should be able to delete a created document
   And I press "Submit"
   Then I should see "new title"
   Then I should see "Delete Document"
+  Then I take a screenshot called "~/are_there_overlapping_elements.png"
   When I follow first "Delete Document"
   And I confirm popup
   Then I should not see "newurl"

@@ -22,6 +22,16 @@ require 'cucumber/rails'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
+Capybara.register_driver :poltergeist do |app|
+	Capybara::Poltergeist::Driver.new(
+ 		app,
+		window_size: [1280, 1024]#,
+		#debug:       true
+	)
+end
+
+
+puts Capybara.default_driver
 Capybara.ignore_hidden_elements = true
 
 # Capybara defaults to CSS3 selectors rather than XPath.

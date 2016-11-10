@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.string   "description"
     t.datetime "date"
     t.string   "url"
+    t.datetime "end"
   end
 
   create_table "read_sessions", force: :cascade do |t|
@@ -78,7 +79,7 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.boolean  "admin"
-    t.datetime "last_sign_in_at",        default: '2016-11-08 14:56:18', null: false
+    t.datetime "last_sign_in_at",        default: '2016-11-02 16:12:50', null: false
     t.boolean  "internal"
     t.boolean  "external"
     t.boolean  "executive"

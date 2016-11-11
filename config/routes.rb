@@ -82,6 +82,10 @@ Rails.application.routes.draw do
   get 'categories/:id/hide_category' => 'category#hide_category', as: :hide_category
   get 'categories/:id/show_category' => 'category#show_category', as: :show_category
   
+  # User Profiles
+  get 'user_profiles' =>'user_profiles#index', as: :user_profiles_index
+  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   # =>                       controller#method

@@ -1,9 +1,16 @@
 class AdminController < ActionController::Base
     layout "base"
-    before_filter :authenticate_user!
+    before_action :authenticate_user!, :authorize_user
+    
+    def authorize_user
+        if not User.find(current_user.id).admin
+            redirect_to "/dashboard"
+        end
+    end
     
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :admin)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name, :title, :committee,
+        :about_me, :why_join, :interests_skills, :internal, :external, :executive, :admin)
     end
 
     def calendar_params
@@ -14,7 +21,6 @@ class AdminController < ActionController::Base
         params.require(:announcement).permit(:title, :content)
     end
     
-
     def index
         @users = User.all
         @announcement_list = Announcement.where(committee_type: "dashboard").order(created_at: :DESC)

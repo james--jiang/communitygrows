@@ -39,6 +39,7 @@ class EventsController < ApplicationController
         
         
         @event = Event.create(event_params)
+        NotificationMailer.new_event_email(User.find_by_email("jmendre@berkeley.edu"), @event).deliver_later!(wait: 5.minutes)
 
         if Rails.env.production?
             User.all.each do |user| 

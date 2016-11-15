@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102231348) do
+ActiveRecord::Schema.define(version: 20161115193013) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -41,6 +41,29 @@ ActiveRecord::Schema.define(version: 20161102231348) do
     t.integer  "announcement_id"
     t.index ["announcement_id"], name: "index_comments_on_announcement_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "digestifier_receipts", force: :cascade do |t|
+    t.string   "recipient_type", null: false
+    t.integer  "recipient_id",   null: false
+    t.datetime "captured_at",    null: false
+    t.string   "digest",         null: false
+    t.index ["digest"], name: "index_digestifier_receipts_on_digest"
+    t.index ["recipient_type", "recipient_id", "digest"], name: "unique_digest_receipts", unique: true
+  end
+
+  create_table "digestifier_settings", force: :cascade do |t|
+    t.string   "recipient_type",                null: false
+    t.integer  "recipient_id",                  null: false
+    t.text     "preferences",    default: "{}", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "enabled",        default: true, null: false
+    t.string   "identifier",                    null: false
+    t.string   "digest",                        null: false
+    t.index ["digest"], name: "index_digestifier_settings_on_digest"
+    t.index ["identifier"], name: "index_digestifier_settings_on_identifier", unique: true
+    t.index ["recipient_type", "recipient_id", "digest"], name: "unique_recipients", unique: true
   end
 
   create_table "documents", force: :cascade do |t|

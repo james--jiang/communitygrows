@@ -3,12 +3,8 @@ class UserController < ActionController::Base
     before_action :authenticate_user!
     
     def user_params
-<<<<<<< HEAD
-        params.require(:user).permit(:email, :password, :password_confirmation, :internal, :external, :executive, :digest_pref)
-=======
         params.require(:user).permit(:email, :password, :password_confirmation, :name,
-        :about_me, :why_join, :interests_skills, :internal, :external, :executive)
->>>>>>> master
+        :about_me, :why_join, :interests_skills, :internal, :external, :executive, :digest_pref)
     end
     
     def index

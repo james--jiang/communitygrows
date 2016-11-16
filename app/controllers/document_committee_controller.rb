@@ -53,7 +53,6 @@ class DocumentCommitteeController < ActionController::Base
                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.new_document_email(user, Document.find_by_title(@title)).deliver
-
                 end
             end
         end
@@ -83,7 +82,6 @@ class DocumentCommitteeController < ActionController::Base
                     NotificationMailer.document_update_email(user, Document.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.document_update_email(user, Document.find_by_title(@title)).deliver
-
                 end
             end
         end

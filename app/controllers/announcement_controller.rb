@@ -33,7 +33,7 @@ class AnnouncementController < ActionController::Base
                     NotificationMailer.annoucement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
-
+                end
             end
         end
     end
@@ -62,7 +62,7 @@ class AnnouncementController < ActionController::Base
                     NotificationMailer.annoucement_update_email(user, Announcement.find_by_title(@title)).deliver!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
-
+                end
             end
         end
     end

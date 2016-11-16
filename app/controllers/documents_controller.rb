@@ -36,15 +36,24 @@ class DocumentsController < ActionController::Base
             category = Category.find(file[:category_id])
             @file = category.documents.create!(file_params)
             if Rails.env.production?
-                User.all.each do |user| 
-                    NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
-                end
+                send_email()
             end
             flash[:notice] = "#{@file.title} was successfully created and email was succesfully sent."
             redirect_to documents_path 
         end
     end
     
+    def send_email
+        User.all.each do |user|
+            if user.digest_pref == "daily"
+                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
+            elsif user.digest_pref == "weekly"
+                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
+            else
+                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
+            end
+        end
+    end
     # def edit_file
     #    @id = params[:format] 
     #    @file = Document.find @id
@@ -67,14 +76,24 @@ class DocumentsController < ActionController::Base
             @target_file.update_attributes!(file_params)
             category.documents << @target_file
             if Rails.env.production?
-                User.all.each do |user| 
-                    NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
-                end
+                send_email_update()
             end
             flash[:notice] = "Document with title [#{@target_file.title}] updated successfully and email was successfully sent."
             redirect_to(documents_path)
         end
     end
+    
+    def send_email_update
+        User.all.each do |user|
+            if user.digest_pref == "daily"
+                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
+            elsif user.digest_pref == "weekly"
+                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
+            else
+                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
+            end
+        end
+    end 
     
     def delete_file
         @file_to_delete = Document.find params[:format]

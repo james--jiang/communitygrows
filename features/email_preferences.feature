@@ -23,7 +23,7 @@ Scenario: Happy Path
   Given I am on the account details page for "james@gmail.com"
 
   When I check "user_internal"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
   Then the "Internal:" checkbox should be checked
@@ -31,7 +31,7 @@ Scenario: Happy Path
   Given I am on the account details page for "james@gmail.com"
   When I check "user_internal" 
   And I check "user_executive"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
   Then the "user_internal" checkbox should be checked
@@ -39,7 +39,7 @@ Scenario: Happy Path
 
   Given I am on the account details page for "james@gmail.com"
   When I check "user_external"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
   Then the "External:" checkbox should be checked
@@ -48,7 +48,7 @@ Scenario: Happy Path
   When I check "user_internal"
   And I check "user_external"
   And I check "user_executive"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Your email preference settings have been updated."
   And I am on the account details page for "james@gmail.com"
   Then the "Internal:" checkbox should be checked
@@ -59,7 +59,7 @@ Scenario: Happy Path
   Given I am on the account details page for "james@gmail.com"
   When I check "user_external" 
   And I check "user_executive"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Your email preference settings have been updated."
   And the "Executive:" checkbox should be checked
   And the "External:" checkbox should be checked
@@ -69,7 +69,7 @@ Scenario: Sad Path
   When I uncheck "user_external"
   And I uncheck "user_internal"
   And I uncheck "user_executive"
-  And I press "Confirm"
+  And I press "Update Information"
   Then I should see "Please select at least your committee to receive emails from."
   And I am on the account details page for "james@gmail.com"
     

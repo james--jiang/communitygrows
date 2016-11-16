@@ -1,6 +1,7 @@
 # By Tony. Steps needed for user testing
 Given /^a valid admin$/ do
   @user = User.create!({
+             :name => "Admin",
              :email => "admindummy@dummy.com",
              :password => "dummypass",
              :password_confirmation => "dummypass",
@@ -10,6 +11,7 @@ end
 
 Given /^a logged in admin$/ do
   @user = User.create!({
+             :name => "Admin",
              :email => "admin@communitygrows.org",
              :password => "communitygrowsrocks",
              :password_confirmation => "communitygrowsrocks",

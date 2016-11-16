@@ -22,56 +22,51 @@ Scenario: Happy Path
 
   Given I am on the account details page for "james@gmail.com"
 
-  When I check "real_time"
-  And I press "Confirm"
-  Then I should see "Your email digest settings have been updated."
+  When I select "Real Time" from "user_digest_pref"
+  And I press "Update Digest"
+  Then I should see "credentials were successfully updated"
   And I am on the account details page for "james@gmail.com"
-  Then the "Real Time:" checkbox should be checked
   
   Given I am on the account details page for "james@gmail.com"
-  When I check "real_time" 
-  And I check "daily"
-  And I press "Confirm"
-  Then I should see "Your email digset settings have been updated."
+  When I select "Daily" from "user_digest_pref"
+  And I press "Update Digest"
+  Then I should see "credentials were successfully updated"
   And I am on the account details page for "james@gmail.com"
-  Then the "Real Time" checkbox should be checked
-  And the "Daily:" checkbox should be checked
 
   Given I am on the account details page for "james@gmail.com"
-  When I check "weekly"
-  And I press "Confirm"
-  Then I should see "Your email digset settings have been updated."
+   When I select "Weekly" from "user_digest_pref"
+  And I press "Update Digest"
+  Then I should see "credentials were successfully updated"
   And I am on the account details page for "james@gmail.com"
-  Then the "External:" checkbox should be checked
 
-  Given I am on the account details page for "james@gmail.com"
-  When I check "real_time"
-  And I check "daily"
-  And I check "weekly"
-  And I press "Confirm"
-  Then I should see "Your email preference settings have been updated."
-  And I am on the account details page for "james@gmail.com"
-  Then the "Real Time:" checkbox should be checked
-  And the "Daily:" checkbox should be checked
-  And the "Weekly:" checkbox should be checked
+#   Given I am on the account details page for "james@gmail.com"
+#   When I check "real_time"
+#   And I check "daily"
+#   And I check "weekly"
+#   And I press "Confirm"
+#   Then I should see "Your email preference settings have been updated."
+#   And I am on the account details page for "james@gmail.com"
+#   Then the "Real Time:" checkbox should be checked
+#   And the "Daily:" checkbox should be checked
+#   And the "Weekly:" checkbox should be checked
 
 
-  Given I am on the account details page for "james@gmail.com"
-  When I check "daily" 
-  And I check "weekly"
-  And I press "Confirm"
-  Then I should see "Your email preference settings have been updated."
-  And the "daily:" checkbox should be checked
-  And the "weekly:" checkbox should be checked
+#   Given I am on the account details page for "james@gmail.com"
+#   When I check "daily" 
+#   And I check "weekly"
+#   And I press "Confirm"
+#   Then I should see "Your email preference settings have been updated."
+#   And the "daily:" checkbox should be checked
+#   And the "weekly:" checkbox should be checked
   
-Scenario: Sad Path
-  Given I am on the account details page for "james@gmail.com"
-  When I uncheck "real_time"
-  And I uncheck "daily"
-  And I uncheck "weekly"
-  And I press "Confirm"
-  Then I should see "Please select your email digest setting."
-  And I am on the account details page for "james@gmail.com"
+# Scenario: Sad Path
+#   Given I am on the account details page for "james@gmail.com"
+#   When I uncheck "real_time"
+#   And I uncheck "daily"
+#   And I uncheck "weekly"
+#   And I press "Confirm"
+#   Then I should see "Please select your email digest setting."
+#   And I am on the account details page for "james@gmail.com"
     
   
   

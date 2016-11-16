@@ -22,7 +22,7 @@ class DocumentsController < ActionController::Base
     end
     
     def create_file
-        file = params[:file]
+        @file = params[:file]
         if file[:title].to_s == "" or file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
             redirect_to new_file_path
@@ -46,11 +46,11 @@ class DocumentsController < ActionController::Base
     def send_email
         User.all.each do |user|
             if user.digest_pref == "daily"
-                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
+                NotificationMailer.new_document_email(user, Document.find_by_title(@file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
             elsif user.digest_pref == "weekly"
-                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
+                NotificationMailer.new_document_email(user, Document.find_by_title(@file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
             else
-                NotificationMailer.new_document_email(user, Document.find_by_title(file[:title])).deliver
+                NotificationMailer.new_document_email(user, Document.find_by_title(@file[:title])).deliver
             end
         end
     end
@@ -61,7 +61,7 @@ class DocumentsController < ActionController::Base
     
     def update_file
         @target_file = Document.find params[:format]
-        file = params[:file]
+        @file = params[:file]
         if file[:title].to_s == "" or file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
             redirect_to info_file_path(params[:format])
@@ -86,11 +86,11 @@ class DocumentsController < ActionController::Base
     def send_email_update
         User.all.each do |user|
             if user.digest_pref == "daily"
-                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
+                NotificationMailer.document_update_email(user, Document.find_by_title(@file[:title])).deliver_later!(wait_until: Time.now.tomorrow.noon())
             elsif user.digest_pref == "weekly"
-                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
+                NotificationMailer.document_update_email(user, Document.find_by_title(@file[:title])).deliver_later!(wait_until: Time.now.next_week.noon())
             else
-                NotificationMailer.document_update_email(user, Document.find_by_title(file[:title])).deliver
+                NotificationMailer.document_update_email(user, Document.find_by_title(@file[:title])).deliver
             end
         end
     end 

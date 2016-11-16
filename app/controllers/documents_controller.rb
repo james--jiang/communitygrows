@@ -23,17 +23,17 @@ class DocumentsController < ActionController::Base
     
     def create_file
         @file = params[:file]
-        if file[:title].to_s == "" or file[:url].to_s == ""
+        if @file[:title].to_s == "" or @file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
             redirect_to new_file_path
-        elsif !(file[:url] =~ /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}[-a-zA-Z0-9@:%_\+.~#=\?\&\/]+/)
+        elsif !(@file[:url] =~ /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}[-a-zA-Z0-9@:%_\+.~#=\?\&\/]+/)
             flash[:notice] = "Please enter a valid URL."
             redirect_to new_file_path
         else 
-            if !(file[:url]=~/http(s)?:/)
-                file[:url]="http://"+file[:url]
+            if !(@file[:url]=~/http(s)?:/)
+                @file[:url]="http://"+@file[:url]
             end
-            category = Category.find(file[:category_id])
+            category = Category.find(@file[:category_id])
             @file = category.documents.create!(file_params)
             if Rails.env.production?
                 send_email()
@@ -62,17 +62,17 @@ class DocumentsController < ActionController::Base
     def update_file
         @target_file = Document.find params[:format]
         @file = params[:file]
-        if file[:title].to_s == "" or file[:url].to_s == ""
+        if @file[:title].to_s == "" or @file[:url].to_s == ""
             flash[:notice] = "Populate all fields before submission."
             redirect_to info_file_path(params[:format])
-        elsif !(file[:url] =~ /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}[-a-zA-Z0-9@:%_\+.~#=\?\&\/]+/)
+        elsif !(@file[:url] =~ /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}[-a-zA-Z0-9@:%_\+.~#=\?\&\/]+/)
             flash[:notice] = "Please enter a valid URL."
             redirect_to info_file_path(params[:format])
         else
-            if !(file[:url]=~/http(s)?:/)
-                file[:url]="http://"+file[:url]
+            if !(@file[:url]=~/http(s)?:/)
+                @file[:url]="http://"+@file[:url]
             end
-            category = Category.find(file[:category_id])
+            category = Category.find(@file[:category_id])
             @target_file.update_attributes!(file_params)
             category.documents << @target_file
             if Rails.env.production?

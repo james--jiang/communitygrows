@@ -1,6 +1,7 @@
 # By Tony. Steps needed for user testing
 Given /^a valid admin$/ do
   @user = User.create!({
+             :name => "Admin",
              :email => "admindummy@dummy.com",
              :password => "dummypass",
              :password_confirmation => "dummypass",
@@ -10,6 +11,7 @@ end
 
 Given /^a logged in admin$/ do
   @user = User.create!({
+             :name => "Admin",
              :email => "admin@communitygrows.org",
              :password => "communitygrowsrocks",
              :password_confirmation => "communitygrowsrocks",
@@ -24,6 +26,6 @@ end
 When /^(?:|I )confirm popup$/ do
 end
 
-When /^(?:|I )follow first "([^"]*)"$/ do |link|
-  click_link(link, match: :first)
+And /^(?:|I )take a screenshot called "([^\"]*)"$/ do |file_name|
+  page.save_screenshot file_name
 end

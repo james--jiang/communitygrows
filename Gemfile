@@ -2,39 +2,40 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '>= 4.2.5'
 
 gem 'devise'
 
 gem 'acts_as_tree'
 
-gem 'rake', '11.3.0'
+gem 'rake'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '>= 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '>= 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 #allow for old style, non turbolinks jquery calls
-gem 'jquery-turbolinks'
-gem 'jquery-ui-rails'
+# gem 'jquery-turbolinks'
+# gem 'jquery-ui-rails'
 
 gem 'whenever', :require => false
 gem 'rspec-activemodel-mocks'
+gem 'digestifier', '0.2.0'
 
 #Haml
 gem 'haml'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '>= 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '>= 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -47,7 +48,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rspec'
 gem 'kramdown'
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '>= 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'rspec-rails'
@@ -62,14 +63,15 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'autotest-rails'
   gem 'factory_girl_rails'
-  gem 'simplecov', :require => false #by Tony. Gem for the test coverage
+  gem 'simplecov'
   gem 'codeclimate-test-reporter'
-  gem 'capybara', '2.6.2' #by Tony
-  # gem 'selenium-webdriver', '3.0.0'
+  gem 'capybara'
+  # gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'phantomjs'
   gem 'headless'
@@ -79,6 +81,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'rspec'
-  # gem 'kramdown'
 end
 

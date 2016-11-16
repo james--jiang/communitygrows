@@ -24,19 +24,19 @@ Scenario: Happy Path
 
   When I select "Real Time" from "user_digest_pref"
   And I press "Update Digest"
-  Then I should see "credentials were successfully updated"
+  Then I should see "info was successfully updated"
   And I am on the account details page for "james@gmail.com"
   
   Given I am on the account details page for "james@gmail.com"
   When I select "Daily" from "user_digest_pref"
   And I press "Update Digest"
-  Then I should see "credentials were successfully updated"
+  Then I should see "info was successfully updated"
   And I am on the account details page for "james@gmail.com"
 
   Given I am on the account details page for "james@gmail.com"
   When I select "Weekly" from "user_digest_pref"
   And I press "Update Digest"
-  Then I should see "credentials were successfully updated"
+  Then I should see "info was successfully updated"
   And I am on the account details page for "james@gmail.com"
 
 

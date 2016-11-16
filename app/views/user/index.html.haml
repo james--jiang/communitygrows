@@ -44,14 +44,9 @@
     
     
   Select how often you want to receive an email digest
-  = form_tag update_user_email_preference_path(@user), method: :post do |f|
+  = form_tag update_user_credentials_path(@user), method: :put do
+  
     .form-group
-      = label :user, :real_time, "Real Time:"
-      = check_box :user, :real_time
-    .form-group
-      = label :user, :daily, "Daily:"
-      = check_box :user, :daily
-    .form-group
-      = label :user, :weekly, "Weekly:"
-      = check_box :user, :weekly
-    = submit_tag 'Confirm', :class => 'btn btn-success'
+      = select :user, :digest_pref, [['Hot','hot'],['Medium','medium'],['Cold','cold']]
+      = submit_tag 'Confirm', :class => 'btn btn-success'
+

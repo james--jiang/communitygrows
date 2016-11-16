@@ -79,9 +79,9 @@ class AdminController < ActionController::Base
         if Rails.env.production?
             User.all.each do |user|
                 if user.digest_pref == "daily"
-                    NotificationMailer.annoucement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.tomorrow.noon())
+                    NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.tomorrow.noon())
                 elsif user.digest_pref == "weekly"
-                    NotificationMailer.annoucement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
+                    NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
                 end
@@ -102,9 +102,9 @@ class AdminController < ActionController::Base
         if Rails.env.production?
             User.all.each do |user|
                 if user.digest_pref == "daily"
-                    NotificationMailer.annoucement_update_email(user, @target_announcement).deliver!(wait_until: Time.now.tomorrow.noon())
+                    NotificationMailer.announcement_update_email(user, @target_announcement).deliver!(wait_until: Time.now.tomorrow.noon())
                 elsif user.digest_pref == "weekly"
-                    NotificationMailer.annoucement_update_email(user, @target_announcement).deliver!(wait_until: Time.now.next_week.noon())
+                    NotificationMailer.announcement_update_email(user, @target_announcement).deliver!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_update_email(user, @target_announcement).deliver
                 end

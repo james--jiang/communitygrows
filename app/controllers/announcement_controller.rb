@@ -28,9 +28,9 @@ class AnnouncementController < ActionController::Base
                 NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
             elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
                 if user.digest_pref == "daily"
-                    NotificationMailer.annoucement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.tomorrow.noon())
+                    NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.tomorrow.noon())
                 elsif user.digest_pref == "weekly"
-                    NotificationMailer.annoucement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
+                    NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver_later!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_email(user, Announcement.find_by_title(@title)).deliver
                 end
@@ -54,12 +54,12 @@ class AnnouncementController < ActionController::Base
             end
                 
             if current_user.admin?
-                NotificationMailer.annoucement_update_email(user, Announcement.find_by_title(@title)).deliver
+                NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
             elsif @committee_type == committe_user_internal or @committee_type == committe_user_external or @committee_type == committe_user_executive 
                 if user.digest_pref == "daily"
-                    NotificationMailer.annoucement_update_email(user, Announcement.find_by_title(@title)).deliver!(wait_until: Time.now.tomorrow.noon())
+                    NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver!(wait_until: Time.now.tomorrow.noon())
                 elsif user.digest_pref == "weekly"
-                    NotificationMailer.annoucement_update_email(user, Announcement.find_by_title(@title)).deliver!(wait_until: Time.now.next_week.noon())
+                    NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver!(wait_until: Time.now.next_week.noon())
                 else
                     NotificationMailer.announcement_update_email(user, Announcement.find_by_title(@title)).deliver
                 end

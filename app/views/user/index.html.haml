@@ -47,6 +47,6 @@
   = form_tag update_user_credentials_path(@user), method: :put do
   
     .form-group
-      = select :user, :digest_pref, [['Hot','hot'],['Medium','medium'],['Cold','cold']]
+      = select :user, :digest_pref, [['Daily','daily'],['Weekly','weekly'],['Real Time','real_time']]
       = submit_tag 'Confirm', :class => 'btn btn-success'
 
